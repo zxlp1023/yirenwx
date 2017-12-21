@@ -1,0 +1,1014 @@
+@import "public";
+@import "iconfont";
+
+// 公用文件结束
+
+/*首页*/
+
+.weui-popup__modal {
+    background: #fff;
+}
+
+.weui-search-bar__cancel-btn {
+    color: #fff;
+    font-size: .75rem;
+}
+
+.weui-search-bar__input:not(:valid)~.weui-icon-clear {
+    display: block;
+}
+
+.weui-search-bar__box .weui-icon-search {
+    @include red;
+    left: .25rem;
+    top: -0.05rem;
+}
+
+.j-search {
+    .weui-search-bar__form {
+        border-radius: 4px;
+    }
+    .weui-search-bar {
+        @include redBg;
+    }
+}
+
+.s-history {
+    padding: 0 $w75;
+    .title {
+        height: 2rem;
+        line-height: 2rem;
+        @include fz(.7rem);
+        .iconfont {
+            @include fz(1rem);
+        }
+        .iconfont:before {
+            padding: 0 .5rem;
+        }
+    }
+    a {
+        background: #efefef;
+        display: inline-block;
+        border-radius: 3px;
+        @include fz(.7rem);
+        color: #161616;
+        padding: .2rem 1rem;
+        margin: 0 .5rem .5rem 0px;
+    }
+}
+
+.pro-index {
+    margin-top: 0;
+    padding-bottom: 3rem;
+    .weui-media-box_appmsg {
+        align-items: flex-start;
+        padding-bottom: 0;
+    }
+    .weui-media-box_appmsg .weui-media-box__hd {
+        width: 6.6rem;
+        height: 4.7rem;
+    }
+    .weui-media-box__thumb {
+        width: 6.6rem;
+        height: 4.7rem;
+        border-radius: .4rem;
+        max-height: none;
+    }
+    &:before {
+        border: none;
+    }
+    &:after {
+        border: none;
+    }
+    .weui-media-box:before {
+        border: none;
+    }
+    .weui-media-box__title {
+        @include fz(.7rem);
+    }
+    .weui-media-box__desc {
+        @include pt;
+        -webkit-line-clamp: 1;
+    }
+    .item-star {
+        @include fz(.7rem);
+        display: flex;
+        align-items: center;
+        span:last-of-type {
+            padding-left: .3rem;
+        }
+    }
+    .item-price {
+        display: flex;
+        align-items: flex-end;
+        .price {
+            @include fz(1rem);
+            flex: 1;
+        }
+        .price:before {
+            content: '¥';
+            /* @include fz(.9rem);*/
+        }
+        .price:after {
+            content: '.00';
+            font-size: .75rem;
+        }
+        .buyers {
+            color: $hui34;
+            @include fz;
+        }
+        .buyers:after {
+            content: '人购买';
+        }
+    }
+}
+
+//首页底部菜单
+.weui-tabbar {
+    &:before{ border-top: none;}
+    z-index: 8; 
+    background: #f3f3f3;
+    height: 2.5rem; align-items: center;
+    position: fixed; 
+    .weui-tabbar__item { padding-top: 0px; }
+    .weui-tabbar__label { font-size: .5rem; line-height: 1.2; }
+    .weui-tabbar__item.weui-bar__item--on {
+        .iconfont,.weui-tabbar__label {            color: #f74747;        }
+    }
+    .weui-tabbar__icon>i,    i.weui-tabbar__icon {  color: #bebebe;   display: block;  }
+    .icon-home{ font-size: 20px; }
+    .icon-message{ font-size: 23px; margin-top: -2px; }
+    .icon-money{ font-size: 26px; margin-top: -5px; }
+    .icon-me{ font-size: 20px; }
+}
+
+.cityBox {
+    overflow: hidden;
+    background: #fff;
+    .weui-search-bar {
+        background: #f8f8f8;
+    }
+    .weui-search-bar__cancel-btn {
+        /* @include red; */
+        color: #666666;
+    }
+    .weui-search-bar__label {
+        height: 1.6rem;
+    }
+    .weui-search-bar__label .weui-icon-search {
+        margin: -.1rem 0 0 0;
+    }
+    .weui-search-bar__box .weui-search-bar__input {
+        height: 1.6rem;
+        padding: 0;
+        line-height: 1.6;
+    }
+    .weui-search-bar__box .weui-icon-search {
+        top: 0;
+    }
+    .hotCity {
+        .title {
+            padding: 0 .5rem;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            position: relative;
+            height: 2.5rem;
+            line-height: 2.5rem;
+            border-bottom: 1px solid #eee;
+            
+            &:after {
+                content: '当前定位';
+                color: #999;
+                font-size: 0.65rem;
+                position: absolute;
+                right: 1.5rem;
+            }
+        }
+        .cityTab {
+            padding: 1rem 0 0 .75rem;
+            font-size: 0.65rem;
+            a {
+                border-radius: 5px;
+                width: 21%;
+                margin: 0 3% .5rem 0;
+                color: #777676;
+                border: 1px solid #f0f0f2;
+                text-align: center;
+                padding: .25rem 0;
+                box-sizing: border-box;
+                float: left;
+            }
+        }
+    }
+}
+
+
+/* /cityBox */
+
+.curCity {
+    background: #ffffff;
+    padding: 0 $w75;
+    color: #676767;
+    border: .5rem solid #f7f7f7;
+    border-left: 0;
+    border-right: 0;
+    height: 2.5rem;
+    line-height: 2.5rem;
+    font-size: 0.8rem;
+    a {
+        color: $red;
+        font-size: 0.7rem;
+        float: right;
+    }
+}
+
+.areaSelect {
+    background: #ffffff;
+    li {
+        height: 2.15rem;
+        border-bottom: 1px solid #f7f7f7;
+        line-height: 2.15rem;
+        font-size: 0.65rem;
+        &:active {
+            background: #f9f9f9;
+        }
+        a {
+            display: block;
+            color: $hui76;
+            padding: 0 $w75;
+        }
+    }
+}
+
+// msg product 商品详情
+.proIntro {
+    background: #fff;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    line-height: 1.2rem;
+    .price {
+        &:before {
+            content: '¥';
+            font-size: 0.85rem;
+        }
+        font-size: 1.15rem;
+        font-weight: bold;
+    }
+    .price2 {
+        padding-left: 0.4rem;
+        font-size: .7rem;
+        color: #939393;
+        text-decoration: line-through;
+    }
+}
+
+.shopService {
+    background: #fff;
+    display: flex;
+    font-size: .65rem;
+    color: $hui94;
+    align-items: center;
+    height: 2rem;
+    padding-left: 0.75rem;
+    span {
+        padding-right: .65rem;
+    }
+    .weui-icon-success {
+        color: $red;
+        font-size: .75rem;
+        vertical-align: sub;
+        padding-right: 2px;
+    }
+}
+
+.commentsPro {
+    background: #fff;
+    .weui-media-box_appmsg { align-items: initial; }
+    .weui-panel__hd {
+        display: flex;
+        align-items: center;
+        .star {
+            margin-left: 0.3rem;
+        }
+        .score {
+            color: #ffd21d;
+            font-weight: normal;
+        }
+    }
+    .fz15b {
+        color: #333;
+    }
+    .weui-media-box__hd {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+    .weui-media-box_appmsg .weui-media-box__thumb {
+        border-radius: 50%;
+    }
+    .weui-media-box_appmsg .weui-media-box__bd {
+        min-width: auto;
+    }
+    .weui-media-box__title {
+        font-size: 0.65rem;
+    }
+    .myStar {
+        display: flex;
+        align-items: center;
+        font-size: 0.65rem;
+        color: #a0a0a0;
+        padding: 0 0 .1rem 0;
+    }
+    .weui-media-box__desc {
+        font-size: 0.65rem;
+        color: $hui94;
+        line-height: 1.4;
+    }
+    .weui-cell_link {
+        font-size: 0.65rem;
+        color: $red;
+    }
+}/* commentsPro */
+
+// 产品详情 
+.proDetails{
+  padding: .75rem;
+  background: #fff;
+  font-size: 0.7rem;
+
+  padding-bottom: 3.5rem;  //底部固定,填充3rem
+}
+.proFoot{
+  height: 2.5rem;
+  line-height: 2.5rem;
+  background: #ffffff;
+  position: fixed;
+  bottom: 0;width: 100%;
+  display: flex; z-index: 30;
+  justify-content:center;
+  align-items: center;
+  // border-top:1px solid #eee;
+
+  .weui-btn{
+    width: 33.333333%;
+    margin: 0;
+
+  }
+  .weui-btn:first-of-type{
+    margin-right: 1.5rem;
+  }
+}
+//commentsPro 查看全部评价
+.commentsListPro{
+    
+    .result{padding: 0 .75rem; background: #ffffff; display: flex; align-items: center; justify-content: space-around; height: 4.25rem; color: #ffd200; }
+    
+    .score{
+        text-align: center; line-height: 1.2;  
+        span{font-size: 1.35rem;}
+        p{font-size: 0.7rem;}
+    }
+    .star{    background-size: 137px auto; width: 137px;height: 22px;; }
+    
+    // .list{}
+    dl{padding: 1.15rem .75rem;  background: #ffffff; margin-top: 1px; }
+    dt{ 
+        display: flex;  align-items: center; 
+        img{ width: 2rem;  height: 2rem; border-radius: 50%; margin-right: 10px;  }
+        span{font-size: 0.6rem; }
+      }
+    dd{font-size: 0.7rem; margin-top: .5rem;}
+
+}
+
+
+//支付 pay
+.pay{
+    .weui-cells{margin-top: 15px;}
+    .weui-agree{ padding-top: 0;
+    padding-bottom: 0; display: flex; align-items: center;  height: 3.5rem;  justify-content: space-between; line-height:normal; background: #ffffff;
+      .weui-agree__text{
+          font-size: 0.7rem;
+        color: inherit;
+        span.price{  font-size: .9rem;
+            &:before{ content: '';}
+        }
+      }
+      input.weui-agree__checkbox{ width: 1rem; height: 1rem; right: 0.35rem;
+        &:before{ font-size: 1rem; background: $red; color: #fff; border:5px solid $red; border-radius: 4px;}
+      }
+    }
+    .weui-cells_checkbox .weui-icon-checked:before{ font-size: 1.2rem; } 
+
+    //微信支付
+    .weui-cell{ 
+        height: 3.5rem; padding: 0 15px; line-height: 1.2;
+    
+        .icon-wechat{ color: #01b700; font-size: 1.1rem; padding-right: .4rem;}
+        p{ font-size: 0.7rem;}
+        span{font-size: 0.6rem; color: $hui67;}
+    }
+    .weui-btn_warn{height: 2rem; border-radius: 1rem;}
+    //支付成功
+    .payOk{
+        padding-top: 3rem;
+        text-align: center; line-height: 1;
+        .icon-success{ font-size: 4.7rem;}
+        p{font-size: 0.95rem; margin-top: 1rem;}
+        .weui-btn_warn{
+            border-radius: 0 ;
+            margin-top: 3rem;
+            width: 80%;
+            height: 2.3rem;
+            font-size: .85rem;
+        }
+    }
+}
+/*pay */
+ 
+//购物车 cart
+.cart{
+    padding-bottom: 4rem;
+    .weui-cells_checkbox .weui-icon-checked:before{font-size: 1rem;}  //选中按钮
+    
+    .pic {    width: 4.5rem;    height: 4.5rem; margin: 0 0.7rem 0 0.5rem;
+        img{ }
+    }
+    .weui-cell__bd{ 
+        align-self: flex-start; 
+    }
+    .priceControl { 
+        padding-top: 1.2rem; display: flex; align-items: center; justify-content: space-between;
+        .price:before{ content:$price; }
+        
+    }
+    .weui-count .weui-count__btn{ border: 0;}
+    .weui-count .weui-count__increase{background: none;}
+    .weui-count .weui-count__btn:after,
+    .weui-count .weui-count__btn:before {
+        background: #7c7c7c;
+    }
+    .weui-count .weui-count__btn{ vertical-align: -4px;}
+    .weui-count .weui-count__btn:after{margin-top: -5px;}
+    .weui-count .weui-count__number{ border: 1px solid #7c7c7c; border-radius: 3px; font-size: 0.7rem; }
+
+    .weui-swiped-btn_warn { background: #f43b3e; font-size: 0.7em; display: flex; align-items: center; padding: 0; width: 3.2rem; justify-content: center; }
+
+}
+.cartFoot{
+    position: fixed; bottom: 0; width: 100%; z-index: 10;
+    .weui-cell{ padding: 0 0 0 .5rem;}
+    .weui-cell__hd{ font-size: 0.75rem; padding-right: 0;}
+    .weui-cells{display: flex;}
+    .weui-cell-r{ flex: 1;}
+    .weui-cell__bd{ text-align: center; font-size: 0.65rem;}
+    a{width: 4.625rem; height: 3rem;  font-size: 0.75rem;}
+    .weui-cells_checkbox .weui-icon-checked:before{ font-size: 1rem;}
+    .price{ font-size: 0.75rem;}
+    .price:before{ content:$price;  padding-left:10px;}
+
+}
+
+//确认订单 confirm order
+.cfmOrder{
+     padding-bottom: 4rem;
+    .addr{
+        padding-bottom: 10px;
+       background: url('../img/bd.png') repeat-x 0 bottom / auto 7px #fff;
+    }
+    .icon-location2{ padding-right: 0;}
+
+    .title{background: #ffffff;  display: flex; align-items: center;  justify-content: center; padding: 0.75rem 0;
+        
+        &:before,&:after{ width: 12%; content: ''; background: #161616; height: 1px; position: relative; right: 9%; }
+        &:after{left: 9%;}
+    }
+    .pic{
+        width: 4rem; height: 4rem; margin-right: 0.7rem;
+    }
+    .weui-count .weui-count__btn{ 
+        border: 0;border-radius: 0; background: #f5f5f5;  vertical-align: -5px;
+        width: 30px;
+        height: 26px;line-height: 26px;
+    }
+
+    .weui-count .weui-count__btn:after, .weui-count .weui-count__btn:before{
+        background: #999; height: 2px; width: 12px;
+        margin-left: -5px;
+        
+    }
+
+    .weui-count .weui-count__btn:after{ height: 12px; width: 2px; margin-left: 0px; margin-top: -5.5px;}
+
+    .list{
+        background: #ffffff;
+        .weui-cell{padding: .5rem .75rem ;}
+        .weui-cell__bd{line-height: 1.8;}
+    }
+    .list:first-child{
+        &:before{ border: 0;}
+    }
+
+    .carriage{
+        background: #ffffff;height: 1.7rem;
+        .price{ color: initial;}
+    }
+
+    .needPay{
+        background: #ffffff;
+         border-top: 1px solid #e5e5e5;
+         padding: 0 15px; 
+         height: 2.1rem;
+         display: flex;
+         align-items: center;
+         justify-content: flex-end;
+    }
+
+}
+/*cfmOrder */
+
+.cfmOrderFoot{
+    .weui-cell__bd{text-align: left;}
+    .weui-btn{
+        height: 2.5rem; width: 5rem;
+    }
+}
+
+//金融  financial
+.financial{
+    @at-root .fncHd{
+        color: #ffffff; height: 9.7rem; padding: 0 1.35rem; 
+        background: url(../img/financialBg2.jpg) no-repeat center top  / cover;
+        p{ font-size: 0.6rem; }
+        span{font-size: 2.125rem; }
+        .backBar{background: none;}
+        .ysd{
+            //yesterday 昨天收益
+            line-height: 1.4; padding-top: 0.5rem;
+        }
+        .result{
+            display: flex; margin-top: .5rem;
+            .resultL{ span{font-size: .8rem;} }
+            .resultR{padding-left: 36%;  span{font-size: .875rem;} }
+        }
+    }
+}
+
+.fncProperty{
+    background: #ffffff; 
+    .weui-cell{padding: 0 1.35rem; height: 3.75rem;}
+    .weui-cell__bd{
+        text-align: right;
+    }
+    .weui-btn{ display: inline-flex; border-radius: 5px; height: 1.5rem; width: 3.25rem; margin-left: 0.3rem;  }
+    .weui-btn+.weui-btn{ margin-top: 0;}
+    .weui-btn_primary{ color: #ff4242; border-color:#ff4242; }
+    .weui-btn_warn{background: #ff4242; }
+}
+
+//question 问题
+.qst{
+    padding: 0 1rem 3rem;
+    li{font-size: 0.75rem; margin: .75rem 0 0 1em; list-style: inherit; /* list-style-position: inside; */ }
+    p{text-indent: 1em; padding-top: 3px; text-align: justify; }
+}
+
+
+//会员中心
+// 我的
+.account{
+    height: 7.75rem; display: flex; align-items: center;  color: #ffffff;
+    background: url(../img/myBg.jpg) no-repeat 0 0 / cover;
+    .weui-cell{padding: 0;}
+    img{
+        width: 4rem; height: 4rem; margin: 0 1rem; border-radius: 50%;
+    }
+}
+
+.weui-grids{
+    background: #fff; text-align: center;
+    .weui-grid{padding: .5rem 0; }
+    .weui-grid:after{border:0;}
+    span{
+      font-size: .75rem; color: $hui94;
+      &:after{ content: '单'; font-size: .5rem; }
+    }
+    p.weui-grid__label{font-size: 0.65em;}
+  }
+
+.quickNav{
+    border: 1px solid #e3e3e3; border-radius: 10px;
+    padding: 0 ; margin: 0.5rem .75rem; 
+    font-size: 0.7rem; 
+    &.weui-cells:before{ border-top: 0;}
+    &.weui-cells:after{border-bottom: 0;}
+    .weui-cell:before{ left: 0.3rem; right: 0.3rem;  border-top: 1px solid #e3e3e3; }
+    .weui-cell{ padding:0 .5rem; height: 2.5rem;    }
+    .weui-cell__hd{ width: .8rem; margin-right: 0.4rem;}
+    .weui-cell_access .weui-cell__ft:after{     border-color: #c4c4c4; }
+}
+
+//红包
+.redPacket{
+    position: relative;    padding: 0 .75rem; margin-bottom: 3rem;  line-height: 1.4;
+    div{
+        position: absolute; bottom: .5rem; left: 1.25rem;
+    }
+    img{ z-index: -1;}
+    span{ color: #ffc6c6; font-size: 0.75rem;}
+    p span{font-size: 1.2rem; color: #fff; }
+}
+
+//
+#dialog{
+    position: fixed; width: 100%;  display: none;
+    height: 100%; z-index: 100;
+    text-align: center;  //关闭按钮居中
+    .bg{
+        position: fixed; z-index: 102;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        background: rgba(0,0,0,.6);
+
+    }
+    .cnt,.getRedPacket{  position: fixed; z-index: 103; top: 24%;left: 0; right: 0; bottom: 0; }
+    img{ display: block; margin: 0 auto; }
+    .icon-close{ display: inline-block; margin-top: 20%;    color: #ffffff; font-size: 1rem;}
+
+    //打开红包
+    .getRedPacket{
+        display: none;
+        z-index: 104;
+        .msg{
+            position: absolute; width: 100%;  text-align: center; top: 20%;
+            color: #ffe034; line-height: 1.2;
+            span{ font-size: 0.7rem;}
+            div{ font-size: 2.9rem;}
+            p{font-size: 0.5rem; border-radius: 4px;  height: 1.2rem; line-height: 1.1rem; display: inline-block;padding: 0 .5rem; background: #bc0000; }
+        }
+    }
+    
+    @media screen and (min-width:415px) {
+        .cnt,.getRedPacket{top: 10%;}
+        img{ width: 60%;}
+        .icon-close{margin-top: 5%;}
+
+    }
+}
+
+//我的钱包 wallet
+.wallet{
+    @at-root .walletHd{
+        color: #ffffff; height: 9.25rem;background: $red; text-align: center; line-height: 1.3;
+        span{font-size: 0.6rem; margin-top: 2rem; display: inline-block;}
+        p{font-size: 2.3rem;}
+    }
+    @at-root .walletBd{
+        width: 93.6%; height: 3.15rem; margin: -1.575rem auto 0; border-radius: 8px; display: flex; align-items: center;       box-shadow: 0 1px 6px #e8e8e8;
+        background: #ffffff;  justify-content: space-evenly; /* font-size: 0.6rem; */
+        a{color: inherit;} 
+        span{ height: 1.6rem; background: #eee; width: 1px;}
+        img{width: 1.2rem;  vertical-align: middle; margin-right: 10px;}
+    }
+
+    .weui-cells{ background:none; margin-top: 0; }
+    .weui-cells:before{border-top: 0;}
+    .weui-cells__title{ font-size: 0.7rem; color: #5b5b5b; background: #f5f5f5; }
+    .weui-cell{ background: #ffffff; }
+    .weui-cell__bd{
+        span{ font-size: 0.7rem;}
+        p{ font-size: 0.6rem; color: #b5b5b5; }
+    }
+    .weui-cell__ft{ color: #2f2f2f; font-size: 0.85rem;}
+}
+
+//邀请好友
+.share{
+    background: #fb4c4b;
+    .backBar{background: none;}
+    .bg{ margin-top: -2.2rem; }
+    .weui-btn{ width: 46%; margin: .5rem auto 0; background: #ff7273;color: #ffffff; height: 2.3rem; border-radius: 1.15rem; border:3px solid #fff; font-size: 0.75em;}
+    ol{
+        width: 76%; margin: 0 auto; padding: 1rem 0; font-size: 0.7em; color: #ffffff;
+        li{ margin-top: .5rem; list-style-position: inside; list-style: inherit; }
+    }
+}
+.invite{
+    margin: 0 8%;  border:1px solid #fff; border-radius: 6px;
+    .title{text-indent: .75rem; font-size: 0.8rem; color: #ffffff;height: 1.6rem; line-height: 1.6rem;   }
+    .intBd{
+        background: #fff;    height: 4.2rem;
+        display: flex; align-items: center;justify-content: space-evenly;
+        div{ text-align: center; }
+        .dashed{  height: 2.25rem; border-right: 1px dashed #d8d8d8; }
+        p{font-size: 0.75rem; color: #a4a4a4;}
+        span{color: #fe4041; font-size: 1.1rem;}
+        span i{font-style: inherit; font-size: 0.75rem; }
+    }
+}
+
+.qrcode{
+    width: 40%; margin: 0 auto; margin-top: .8rem; //消除第一张图片上边距 负2.2rem
+    /* padding: 10px;border-radius:10px;  background: #fff;*/ box-sizing: border-box; line-height: 1;
+    img{ border-radius: 10px;}
+}
+
+// 邀请记录 ivtRecord  
+.ivtRecord{ 
+    li{  height: 2.15rem; line-height: 2.15rem;
+        color: #5c5c5c; font-size: 0.65rem;
+        &:first-child{ font-size: 0.7rem; color: inherit; border-bottom:1px solid #f3f3f3; }
+        span{ width: 33%; text-align: center; display: inline-block;  }
+    }
+    
+}
+
+
+// address-manage 收货地址管理  
+.addr-manage{
+    .weui-icon-success{ color:  $red; }
+    dl{
+    background: #fff;  margin:.75rem .75rem 0;  padding:0 0.75rem;line-height: 2.25rem;
+    }
+    dd{ font-size: 0.75rem; }
+    dt{ 
+        display: flex; align-items: center; font-size: 0.65rem;  justify-content: space-between;
+        i{padding-right: 0.2rem;}
+        .weui-icon-circle,.weui-icon-success{ font-size: 0.9rem; vertical-align: text-top; }
+        .icon-edit,.icon-trash3{ font-size: 0.8rem;}
+        p{
+            color: #6e6e6e;
+            .delete{ margin-left: 1.5rem; }
+        }
+    }
+}
+
+//  address-add 添加地址
+.addr-add{ font-size:.7rem;
+    input::-webkit-input-placeholder{ color: $hui94;}  // 设置 placeholder 颜色
+  .weui-label{ width: 3.5rem; &.w6r{ width: 5.5rem;}}
+  
+  .title{ height: 1.5rem; line-height: 1.5rem; padding: 0 .75rem; font-size: 0.6rem;}
+  .weui-check__label{ display: inline-flex; align-items: center;}
+  .weui-check__label:last-of-type{ margin-left: 2.5rem;}
+  .weui-cell{ padding-top: 0;padding-bottom: 0; height: 2.5rem;}
+  .weui-cell:before{ left: 0;}
+  .weui-cells{ font-size:.7rem;}
+  .weui-cells .weui-cell .weui-check:checked + .weui-icon-checked:before{ content: '\EA06'; font-size: 1rem; padding-right: 3px; color: $red;}
+  .weui-cells .weui-cell .weui-check:not(:checked) + .weui-icon-checked:before{content: '\EA06'; font-size: 1rem; padding-right: 3px; color: #bebebe;}
+  .bGlocation3{ background: url(../img/icon/location3.png) no-repeat 0 center / 13px; text-indent: 20px;}
+      
+  .weui-btn_warn{ width: 80%; margin-top: 1rem; height: 1.75rem; line-height: 1.75rem; font-size:.7rem; border-radius: 5px;}
+}
+
+//  logistics 查看物流
+.logistics{
+    .weui-media-box_appmsg{ align-items: flex-start; padding: 0.75rem; background: #ffffff;   }
+    .weui-media-box__hd{width: 3.25rem;height: 3.25rem; border:1px solid #d8d8d8;border-radius: 5px; box-sizing: border-box;}
+    .weui-media-box__bd{line-height: 1.4; padding-right: 0.75rem;  }
+    .weui-media-box__thumb{border-radius: 5px;  }
+    .weui-media-box__title{ white-space:inherit; font-size: 0.7rem; }
+    .weui-media-box__desc{margin-top: .2rem; font-size: 0.6rem; color: $hui94;}
+    .weui-media-box__ft .price{ color: inherit; font-size: 0.7rem;}
+    .weui-media-box__ft span{ 
+        color: $hui94; font-size: 0.6rem;
+        &:before{content: "x";}
+    }
+
+    .info{
+        margin: 0.3rem 0;
+        padding:.5rem .75rem; background: #ffffff;font-size: 0.7rem; 
+        color: $hui94; /* font-size: 0.6rem; */
+        p:first-child{ color: initial;}
+        p{ line-height: 1.2rem;}
+        p span{ color: #007aff; font-size: 0.7rem;}
+    }
+
+    .status{
+        background: #ffffff;
+        padding: 0.5rem 0;
+        ul{  /* border-left: 1px solid #d8d8d8;border-left: 1px solid ##d8d8d8; */ margin-left: 1rem;}
+        li{ position: relative; font-size: 0.7rem; color: #999999; border-left: 1px solid #eee; 
+            padding: 0.3rem 0.5rem .3rem 1rem; 
+            p{line-height: 1.4;}
+            span{font-size: 0.6rem;}
+
+            &:before{ position: absolute; width: 7px; height: 7px; background: #d8d8d8; content: ""; border-radius: 50%; left:-7px; border:3px solid #eee;}
+            &:after{ border-top: 1px solid #eee; content: ""; position: absolute; left: 1rem; right: 0; bottom: 0; }
+
+        }
+        li:first-child{ padding-top: 0; }
+        li:last-child{border: 0;
+            &:after{border: 0;}
+        }
+        li.on{
+            color: #fe4041;
+            &:before{
+               background: #fe4041;
+                border-color: #ffd8e2;
+            }
+        }
+    }
+} //logistics
+
+//orderDetails  订单详情
+.orderDetails{ margin-top: 0.5rem;  background: #ffffff; 
+    .weui-panel__hd{
+        background: #ffffff; font-size: 0.7rem; padding: 0 .75rem;  line-height: 1.75rem; color: inherit;
+        span{font-size: 0.6rem;}
+        &:after{ left: 0; }
+    }
+    .weui-media-box_appmsg{
+        background: #f7f7f7; margin-top: 0.25rem;
+        &:before{ border-top: 0;}
+        &:first-of-type{ margin-top: 0;}
+    }
+    .weui-panel__ft{
+         padding: 0.3rem 0; font-size: 0.6rem; line-height: 2; overflow: hidden;
+         .bb1{ padding-bottom: 5px; margin-bottom: 5px; margin-left: 0.75rem;}
+         p{ padding: 0 .75rem;}
+         border-bottom: 1px solid #e7e7e7;
+    }
+
+    &.proFoot{
+        border-top: 1px solid #e7e7e7;
+        height: 2.75rem;  justify-content: space-between; padding: 0 4%; box-sizing: border-box;
+        .weui-btn{ height: 1.3rem; line-height: 1.3rem; width: 23%; padding: 0; 
+            &:first-of-type{ width: auto; }
+        }
+        .weui-btn_plain-default{ border:0;}
+        .weui-btn_disabled.weui-btn_primary{ background: inherit;}
+    }
+}
+
+
+//orders 我的订单  订单状态
+
+    .weui-navbar{
+        background: #ffffff; justify-content: space-around;
+    }
+    .weui-navbar__item{ color: $hui94; font-size: 0.75rem; padding: 9px 0;  flex:inherit;
+        &:after{border: 0;}
+    }
+    .weui-navbar__item.weui-bar__item--on{
+        color: $red; background: 0;
+        border-bottom: 3px solid $red;
+    }
+    .weui-navbar+.weui-tab__bd{padding-top: 45px;}
+.orders{
+
+    background:none; margin-top: 0.3rem;
+    .orderDetails{ background: inherit; }
+    .weui-panel{margin-top: 0.3rem; background: inherit;}
+    .weui-panel__hd{color: #999; border-bottom: 1px solid #e7e7e7;  font-size: 0.6rem;}
+    .weui-panel__hd:after{border:0;}
+    .weui-media-box_appmsg{ background: #ffffff; /* border-bottom: 1px solid #e7e7e7; */}
+    .weui-btn{width: 23%; margin-top: 10px; margin-right: .75rem; height: 1.3rem; line-height: 1.3rem; padding: 0; display: inline-flex; }
+    .weui-btn_default{ background: none;  color:inherit; border:1px solid #d8d8d8;}
+    // .weui-btn+.weui-btn{margin-top: 10px;}
+    .weui-panel__ft{ border-top: 1px solid #e7e7e7; padding-bottom: .75rem;background: #ffffff;  border-bottom: none; }
+    
+}
+
+//withdraw 提现
+
+.withdraw{
+    .weui-cell{ 
+        background: #ffffff;
+        height: 3.3rem; padding: 0 15px; line-height: 1.2;
+    
+        .icon-wechat{ color: #01b700; font-size: 1.1rem; padding-right: .75rem;}
+        p{ font-size: 0.8rem;}
+        span{font-size: 0.7rem; color: $hui67;}
+    }
+    .bd{ 
+        background: #fff; padding: .5rem .75rem 0 ;  margin-top: 0.5rem;
+        .weui-cell{
+            height:auto; padding: .75rem 0;
+            span.red{color: $red;}
+        }
+    
+    }
+    #remind{
+        position: relative;  
+         p{display: none; font-size: 0.7rem; position: absolute; top:0; left: 0; background: #ffffff; }
+    }
+    .weui-cell:before{border-top: none;}
+    .withdrawNumber{height: auto; font-size: 1.5rem;  padding: 15px 0;
+        .weui-label{width: 1.2rem;}
+    }
+    input{ font-size: 1.2rem; padding: .3rem 0;    }
+    p.bt1{ line-height: 2.25rem;}
+    
+    .weui-btn_warn{ background: $red; height: 2.3rem; line-height: 2.3rem; margin-top: 3rem; border-radius: 1.65rem; font-size: 0.85rem;}
+
+    
+
+} 
+
+
+//topUp 充值
+
+.topUp{
+    .weui-btn_warn{margin-top: 0.75rem; border-radius: 4px;}
+}
+
+//details 明细
+.details{
+     margin-top: 0; 
+    .weui-cell__bd p:first-of-type{ font-size: .75rem; }
+    .weui-cell__bd p:last-of-type{ font-size: .6rem; color:#727272; }
+    .weui-cell__ft{font-size: 1rem; color: inherit; }
+    .weui-cell.in .weui-cell__ft { color: $red;}
+}
+
+//comment 评价
+.comment{
+    background: #ffffff;  padding-bottom: 10px;
+    .pro{padding: .75rem;}
+    
+    .weui-media-box_appmsg{ background: #f7f7f7; }
+    .weui-media-box__hd{ width: 2.5rem; height: 2.5rem;}
+    .weui-media-box__bd{padding-right: 0;}
+
+    .bd{ text-align: center; margin-top: 5px; }
+    .star{margin: 1.1rem 0 1.5rem;}
+    .textareaBg{ background: #fafafa; border:1px solid #ededed;  border-radius: 4px; margin:0 15px 10px;padding: 10px 10px 5px;}
+    textarea{ background: none; /* color: #9d9d9d;  */font-size: 0.7rem; }
+    textarea::-webkit-input-placeholder { color: #9d9d9d; }
+    // .weui-textarea-counter{ color: #9d9d9d;}
+
+    .weui-cell:before{border-top: 0;}
+    .weui-uploader__input-box{
+        width: 3.4rem; height: 3.4rem;
+        border: 1px solid #e4e4e4; border-radius:4px;
+        background: url(../img/icon/camera.png) no-repeat center center / contain;
+    }
+    .weui-uploader__file{ width: 3.5rem; height: 3.5rem;}
+    .weui-uploader__input-box:after, .weui-uploader__input-box:before{display: none;}
+}
+
+.btn-comment{height: 2.25rem; line-height: 2.25rem; margin-top: 0.75rem; border-radius: 1.125rem;}
+
+
+//call 网络电话
+.call{ padding-bottom: 3rem;
+    .weui-input{text-align: center; font-size: 2rem; font-weight: 300;     }
+    .weui-label{width: 1.25rem; }
+    .icon-tuige{ font-size: 1.25rem; }
+    .weui-btn_warn{ width: 3.75rem; height: 3.75rem; border-radius: 50%; }
+    .weui-cell__bd{width: 80%; overflow: hidden; }
+    .weui-cell__hd{ margin-left: 0.5rem; }
+   
+    .icon-tel{ 
+        font-size: 1.5rem; color: #ffffff; transform: rotate(-135deg)
+    }
+
+}
+.keyboard{
+    padding: 0 8%; overflow: hidden;
+    /* display: flex;
+    align-items: center;
+    justify-content: space-evenly; */
+
+    a{width: 33.333333%; float: left; color: inherit; text-align: center; }
+    a:last-child dt{ font-size: 1.35rem;}
+    a:nth-last-child(3) dt{margin-top: 0.5rem;}
+    dl{ width: 3.75rem; height: 3.75rem; margin: 0 auto; margin-bottom: 0.75rem; border-radius: 50%; border:1px solid #a6aebf; box-sizing: border-box; display: flex; align-items: center; justify-content: center; flex-direction: column;  }
+    dl:active{background: $red; color:#fff; border-color: $red;}
+    dt{ font-size: 1.8rem; font-weight: 300; line-height: .9;  }
+    dd{font-size: 0.5rem;}
+}
+@media screen and (max-width:320px) {
+    .call .weui-input{font-size: 1.8rem;}
+    .keyboard dl,.weui-btn_warn{ width: 3.25rem; height: 3.25rem;}
+}
+
+//callAwait 呼叫等待 
+.callAwait{ color: #ffffff; text-align: center;
+    .backBar{background: #000000;}
+    .person{ 
+        position: relative; top: 6.25rem;
+        font-size: 0.85rem; padding-bottom: 5rem;
+        img{width: 4rem;  height: 4rem; display: inline-block;  }
+        span{ display: block; }
+        p{ margin-top: .75rem;  }
+    }
+
+    .icon-tel{ 
+        font-size: 1.5rem; color: #ffffff; /* transform: rotate(-135deg) */
+    }
+    .weui-btn_warn,.weui-btn_success{ width: 3.25rem; height: 3.25rem; border-radius: 50%; }
+    .weui-btn_success{background: #40d151;
+        .icon-tel{ transform: rotate(-135deg) }
+    }
+
+    footer{
+        display: flex; justify-content: space-evenly; align-items: center;
+        position: fixed; width: 100%; height: 5rem; bottom: 1rem;
+        p{font-size: 0.7rem; padding-top: .5rem;}
+
+    }
+}

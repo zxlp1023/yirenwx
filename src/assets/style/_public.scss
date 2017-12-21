@@ -1,0 +1,263 @@
+a{color: inherit;}
+ul,li {
+    list-style: none;
+}
+
+body {
+    background: #f7f7f7;
+}
+.weui-cell_access .weui-cell__ft:after {
+    height: 0.4rem;
+    width: 0.4rem;
+    margin-top: -0.2rem;
+    border-width: 1px 1px 0 0;
+    border-color: #878787;
+}
+$w75:.75rem;
+$red:#e23838;
+$price:'¥';
+$hui67:#676767;
+$hui76:#777676;
+$hui94:#949494;
+.hui72{color: #727272;}
+.hui94 {
+    color:#949494
+}
+#bgf{ background: #ffffff;}
+#bg0{ background: #000;}
+.weui-btn_primary:not(.weui-btn_disabled):visited{color: $red;}
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+img {
+    width: 100%;
+}
+
+@mixin fz($value:.6rem) {
+    font-size: $value;
+}
+
+@mixin pt($value:.25rem) {
+    padding-top: $value;
+}
+
+@mixin red {
+    color: #e23838
+}
+
+@mixin redBg {
+    background: #e23838;
+}
+
+.col {
+    padding: 0 .75rem;
+}
+
+.red {
+    color: #e23838
+}
+
+.fz12 {
+    @include fz
+}
+
+.fz13 { @include fz(.65rem) }
+.fz14 {
+    @include fz(.7rem)
+}
+.fz15 { @include fz(.75rem) }
+
+
+.fz15b {
+    @include fz(.75rem);
+    font-weight: bold;
+}
+
+.fz16 {
+    @include fz(.8rem)
+}
+.fz17 {
+    @include fz(.85rem)
+}
+
+.fz18 {
+    @include fz(.9rem)
+}
+
+.fz20 {
+    @include fz(1rem)
+}
+// 控制距离
+.pl10{ padding-left: .5rem; }
+.mt0 { margin-top: 0; }
+.mt1 { margin-top: 1px; }
+.mt10 {
+    margin-top: 10px;
+}
+.mt15{ margin-top: 15px;}
+
+.mt20 {
+    margin-top: 20px;
+}
+
+$hui34:#c4c4c4;
+.c-hui34 {
+    color: #c4c4c4;
+}
+
+.p05 {
+    padding: 0 .5rem
+}
+
+.p075 {
+    padding: 0 .75rem
+}
+
+// 图标 icon 
+.icon-location2 {
+    @include red;
+    font-size: 1rem !important;
+    padding-right: 0.25rem;
+}
+
+//评分
+.star {
+    display: inline-block;
+    width: 86px;
+    height: 12px;
+    vertical-align: middle;
+    background: url('../img/starList.png') no-repeat;
+    background-size: 86px auto;
+}
+
+.star.star-0 { background-position: 0 -134px }
+.star.star-10 { background-position: 0 -117px }
+.star.star-20 { background-position: 0 -100px }
+.star.star-30 { background-position: 0 -83px }
+.star.star-35 { background-position: 0 -66px }
+.star.star-40 { background-position: 0 -49px }
+.star.star-45 { background-position: 0 -32px }
+.star.star-50 { background-position: 0 -15px }
+
+.commentsListPro{
+    .star.star-0 { background-position: 0 -214.4px }
+    .star.star-10 { background-position: 0 -187.2px }
+    .star.star-20 { background-position: 0 -160px }
+    .star.star-30 { background-position: 0 -132.8px }
+    .star.star-35 { background-position: 0 -105.6px }
+    .star.star-40 { background-position: 0 -78.4px }
+    .star.star-45 { background-position: 0 -51.2px }
+    .star.star-50 { background-position: 0 -24px }
+}
+
+
+.text-right{text-align: right;}
+.bt1{border-top: 1px solid #e7e7e7;}
+.bb1{border-bottom: 1px solid #e7e7e7;}
+.weui-btn {
+   /*  height: 1.75rem;
+    line-height: 1.75rem; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: .875rem;
+    font-size: 0.7rem;
+}
+.btn-radius0{border-radius: 0 !important;}
+
+.weui-btn_primary {
+    background: white;
+    color: $red;
+    border: 1px solid $red;
+}
+
+.weui-btn_primary:not(.weui-btn_disabled):active {
+    background: #f9f9f9;
+    // color: rgba(202, 50, 50, 0.8);
+    color:  $red;
+}
+
+.weui-btn_warn {
+    background: $red;
+    color: #fff;
+}
+.weui-cells_checkbox .weui-check:checked+.weui-icon-checked:before{ color: $red;}
+.price{ 
+    color: #fd5757;
+    &:before{ content: '¥'; }}
+
+.backBar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    height: 2.2rem;
+    color: #fff;
+    @include fz(.85rem);
+    @include redBg;
+    .title {
+        text-align: center;
+        flex: 1;
+    }
+    a .icon-back {
+        font-size: 1.2rem;
+        position: absolute; top: 0.15rem;
+        &:before {        padding: 0 0.4rem;    }
+    }
+    a.right{  position: absolute; right: 0; color: inherit; width: 2rem; height: 2.2rem; line-height: 2.2rem; font-size: 0.7em; padding-left: 1rem; }//添加按钮
+}
+
+.header {
+    .searchBar {
+        background: #fff;
+        display: flex;
+        align-items: center;
+        .city {
+            //display: flex;
+            @include fz(.6rem);
+            .icon-location1 {
+                @include red;
+                @include fz(1rem);
+            }
+        }
+        .search {
+            flex: 1;
+            @include fz(.6rem);
+            color: #afafaf;
+            .search-index {
+                height: 1.45rem;
+                line-height: 1.45rem;
+                margin: .5rem 0 .5rem .5rem;
+                padding: 0 .75rem;
+                border-radius: 1.4rem;
+                background: #f5f5f5;
+                .icon-search {
+                    @include red;
+                    float: right;
+                }
+            }
+        }
+    }
+}
+
+.swiper-wrapper img {
+    display: block;
+}
+
+.swiper-pagination-bullet-active {
+    background: #fff;
+}
+
+//panel
+.a.weui-media-box {
+    color: #121317;
+}
+
+.weui-media-box__desc {
+    color: #c4c4c4;
+}
