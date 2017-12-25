@@ -116,148 +116,12 @@
     <!--城市列表-->
     <div class="container">
       <div class="city">
-        <div class="city-list">
-          <span class="city-letter" id="A1">A</span>
-          <p data-id="210300">鞍山市</p>
-          <p data-id="152900">阿拉善盟</p>
-          <p data-id="340800">安庆市</p>
-          <p data-id="410500">安阳市</p>
-          <p data-id="542500">阿里地区</p>
+        <div class="city-list" v-for="(items,index) in citylist">
+          <!-- <span class="city-letter" id="A1" >{{citylist.index}}</span> -->
+          <mt-cell class="city-letter" :title="index"></mt-cell>
+          <p v-for="item in items">{{item.name}}</p>
         </div>
-        <div class="city-list">
-          <span class="city-letter" id="B1">B</span>
-          <p data-id="220800">白城市</p>
-        </div>
-        <div class="city-list">
-          <span class="city-letter" id="C1">C</span>
-          <p data-id="140400">长治市</p>
-          <p data-id="130900">沧州市</p>
-        </div>
-        <div class="city-list">
-          <span class="city-letter" id="D1">D</span>
-          <p data-id="232700">大兴安岭地区</p>
-        </div>
-        <div class="city-list">
-          <span class="city-letter" id="E1">E</span>
-          <p data-id="150600">鄂尔多斯市</p>
-          <p data-id="420700">鄂州市</p>
-          <p data-id="422800">恩施土家族苗族自治州</p>
-        </div>
-        <div class="city-list">
-          <span class="city-letter" id="F1">F</span>
-          <p data-id="210900">阜新市</p>
-          <p data-id="210400">抚顺市</p>
-          <p data-id="350181">福清市</p>
-          <p data-id="341200">阜阳市</p>
-          <p data-id="370983">肥城市</p>
-          <p data-id="361000">抚州市</p>
-          <p data-id="350100">福州市</p>
-          <p data-id="440600">佛山市</p>
-          <p data-id="450600">防城港市</p>
-        </div>
-        <div class="city-list">
-          <span class="city-letter" id="G1">G</span>
-          <p data-id="440100">广州市</p>
-          <p data-id="360700">赣州市</p>
-          <p data-id="510800">广元市</p>
-          <p data-id="511600">广安市</p>
-          <p data-id="450300">桂林市</p>
-          <p data-id="450800">贵港市</p>
-          <p data-id="520100">贵阳市</p>
-          <p data-id="513300">甘孜藏族自治州</p>
-          <p data-id="623000">甘南藏族自治州</p>
-          <p data-id="640400">固原市</p>
-          <p data-id="632600">果洛藏族自治州</p>
-        </div>
-        <div class="city-list">
-          <span class="city-letter" id="H1">H</span>
-          <p data-id="231100">黑河市</p>
-        </div>
-        <div class="city-list">
-          <span class="city-letter" id="J1">J</span>
-          <p data-id="210700">锦州市</p>
-          <p data-id="620900">酒泉市</p>
-        </div>
-        <div class="city-list">
-          <span class="city-letter" id="K1">K</span>
-          <p data-id="320583">昆山市</p>
-          <p data-id="410200">开封市</p>
-          <p data-id="530100">昆明市</p>
-          <p data-id="650200">克拉玛依市</p>
-          <p data-id="653000">克孜勒苏柯尔克孜自治州</p>
-          <p data-id="653100">喀什地区</p>
-        </div>
-        <div class="city-list">
-          <span class="city-letter" id="L1">L</span>
-          <p data-id="141000">临汾市</p>
-          
-        </div>
-        <div class="city-list">
-          <span class="city-letter" id="M1">M</span>
-          <p data-id="231000">牡丹江市</p>
-          <p data-id="340500">马鞍山市</p>
-          <p data-id="510700">绵阳市</p>
-          <p data-id="511400">眉山市</p>
-          <p data-id="440900">茂名市</p>
-          <p data-id="441400">梅州市</p>
-        </div>
-        <div class="city-list">
-          <span class="city-letter" id="N1">N</span>
-          <p data-id="320100">南京市</p>
-        </div>
-        <div class="city-list">
-          <span class="city-letter" id="P1">P</span>
-          <p data-id="211100">盘锦市</p>
-        </div>
-        <div class="city-list">
-          <span class="city-letter" id="Q1">Q</span>
-          <p data-id="130300">秦皇岛市</p>
-          <p data-id="230200">齐齐哈尔市</p>
-
-        </div>
-        <div class="city-list">
-          <span class="city-letter" id="R1">R</span>
-          <p data-id="320682">如皋市</p>
-          <p data-id="371082">荣成市</p>
-          <p data-id="371100">日照市</p>
-          <p data-id="542301">日喀则市</p>
-        </div>
-        <div class="city-list">
-          <span class="city-letter" id="S1">S</span>
-          <p data-id="220300">四平市</p>
         
-        </div>
-        <div class="city-list">
-          <span class="city-letter" id="T1">T</span>
-          <p data-id="140100">太原市</p>
-          <p data-id="211200">铁岭市</p>
-          <p data-id="220500">通化市</p>
-        </div>
-        <div class="city-list">
-          <span class="city-letter" id="W1">W</span>
-          <p data-id="330300">温州市</p>
-          <p data-id="320200">无锡市</p>
-          <p data-id="150900">乌兰察布市</p>
-
-        </div>
-        <div class="city-list">
-          <span class="city-letter" id="X1">X</span>
-          <p data-id="140900">忻州市</p>
-          <p data-id="152500">锡林郭勒盟</p>
-
-        </div>
-        <div class="city-list">
-          <span class="city-letter" id="Y1">Y</span>
-          <p data-id="320282">宜兴市</p>
-          <p data-id="222400">延边朝鲜族自治州</p>
-          <p data-id="321000">扬州市</p>
-          <p data-id="140800">运城市</p>
-          <p data-id="320900">盐城市</p>
-        </div>
-        <div class="city-list">
-          <span class="city-letter" id="Z1">Z</span>
-          <p data-id="130700">张家口市</p>
-        </div>
       </div>
     </div>
   </div>
@@ -268,8 +132,19 @@
     name: 'City',
     data () {
       return {
-        title: '城市'
+        title: '城市',
+        citylist: ''
       }
+    },
+    mounted: function () {
+    //生命周期
+    this.$http.get('http://cangdu.org:8001/v1/cities?type=group').then(response => {
+      this.citylist = response.body
+      console.table(response)
+    }), response => {
+      console.log(response)
     }
+    
+  }
   }
 </script>

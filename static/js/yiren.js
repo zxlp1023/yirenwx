@@ -17,9 +17,9 @@ $(function () {
         })
 
     //删除历史纪录
-    $('#dltSearch').click(function () {
+/*     $('#dltSearch').click(function () {
         $(this).parent().siblings().remove();
-    })
+    }) */
 
     //收获地址
     $('.addr-manage .default').click(function(){

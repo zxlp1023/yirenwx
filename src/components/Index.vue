@@ -6,18 +6,10 @@
       </div>
       <search></search>
   </div> <!--/header-->
-  <div class="swiper-container">
-    <!-- Additional required wrapper -->
-    <div class="swiper-wrapper">
-      <!-- Slides -->
-      <div class="swiper-slide" v-for="banner in banners"><img :src="banner.img" /></div>
-    </div>
-    <!-- 隐藏状态按钮 -->
-    <!--<div class="swiper-pagination"></div>-->
-  </div> <!--banner end-->
+  <banner></banner>
   <div class="weui-panel pro-index">
     <div class="weui-panel__bd">
-      <router-link to="Product" class="weui-media-box weui-media-box_appmsg" v-for="i in pros">      
+      <router-link to="Product" class="weui-media-box weui-media-box_appmsg" v-for="i in pros" :key="i.id">      
       <!-- <a href="msg-product.html" class="weui-media-box weui-media-box_appmsg" v-for="i in pros"> -->
         <div class="weui-media-box__hd">
           <img class="weui-media-box__thumb" :src="i.img" alt="">
@@ -69,18 +61,15 @@
 </template>
 <script>
 import Search from '@/components/Search'
+import Banner from '@/components/Banner'
 export default {
   name: 'Index',
   data () {
     return {
       title: '亿人电贸',
-      banners: [
-        {img: '../../src/assets/img/up/banner.jpg'},
-        {img: '../../src/assets/img/up/banner.jpg'},
-        {img: '../../src/assets/img/up/banner.jpg'}
-      ],
       pros: [
         {
+          id: 1,
           img: '../../src/assets/img/up/2.jpg',
           title: 'NEW新款上新',
           subTitle: '年度新款等您来抢2',
@@ -90,6 +79,7 @@ export default {
           url: 'url'
         },
         {
+          id: 2,
           img: '../../src/assets/img/up/2.jpg',
           title: 'NEW新款上新',
           subTitle: '年度新款等您来抢1',
@@ -101,7 +91,7 @@ export default {
       ]
     }
   },
-  components: { Search }
+  components: { Search, Banner }
 }
 </script>
 
