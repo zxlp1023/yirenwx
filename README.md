@@ -1,6 +1,6 @@
 # yirenwx
 
-> 亿人电贸微信
+> 亿人共享微信
 
 ## Build Setup
 

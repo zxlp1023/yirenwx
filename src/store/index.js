@@ -7,10 +7,10 @@ import mutations from './mutations'
 Vue.use(Vuex)
 
 const state = {
-
+  nowcity: ''
 }
 
-export default Vuex.Store({
+export default new Vuex.Store({
   state,
   getters,
   actions,

@@ -2,8 +2,9 @@
   <div>
     <div class="header">
       <div class="backBar">
-        <div class="title" v-text="title">亿人电贸</div>
+        <div class="title" v-text="title">亿人共享</div>
       </div>
+      <!-- 搜索栏 -->
       <search></search>
   </div> <!--/header-->
   <banner></banner>
@@ -66,7 +67,7 @@ export default {
   name: 'Index',
   data () {
     return {
-      title: '亿人电贸',
+      title: '亿人共享',
       pros: [
         {
           id: 1,

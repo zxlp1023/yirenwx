@@ -32,7 +32,7 @@
     name: '',
     data () {
       return {
-        title: '亿人电贸',
+        title: '亿人共享',
         active: true,
       }
     }

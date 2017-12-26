@@ -117,8 +117,8 @@
     line-height: 2.25rem;
 }
 
-.city-list p {
-    padding: 0 0.75rem;
+.city-list a {
+    padding: 0 0.75rem; display: block;
     background: #ffffff;
     font-size: 0.65rem;
     color: #777676;

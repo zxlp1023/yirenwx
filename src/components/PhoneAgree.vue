@@ -2,7 +2,7 @@
   <div class="callAwait">
     <div class="backBar">
       <!-- <i class="iconfont icon-back"></i> -->
-      <div class="title" v-text="title">亿人电贸</div>
+      <div class="title" v-text="title">亿人共享</div>
     </div>
     <div class="person">
       <img src="../assets/img/up/head.png" alt="">
@@ -36,5 +36,5 @@
   }
 </script>
 <style scoped>
-  body{background: #000000;}
+  body{background: #000000 !important;}
 </style>

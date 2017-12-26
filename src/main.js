@@ -19,19 +19,20 @@ import router from './router'
 // import $ from 'jquery'
 // console.log($('#app'))
 
+// 引入Vuex
+import store from './store/index'
+
 // 引入resource
 import Resource from 'vue-resource'
 Vue.use(Resource)
 
-// 引入Vuex
-// import store from './store/index'
 Vue.use(MintUI)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  // store,
+  store,
   router,
   template: '<App/>',
   components: { App }

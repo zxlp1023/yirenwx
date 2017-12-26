@@ -2,7 +2,7 @@
   <div>
     <div class="backBar">
       <router-link to="Payok" > <i class="iconfont icon-back"></i> </router-link>
-      <div class="title" v-text="title">亿人电贸</div>
+      <div class="title" v-text="title">亿人共享</div>
     </div>
     <div class="cfmOrder">
       <div class="weui-cells addr mt0">

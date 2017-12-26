@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="searchBar p05">
-      <router-link to="City" class="city"><i class="icon iconfont icon-location1"></i>成都市</router-link>
+      <router-link to="City" class="city"><i class="icon iconfont icon-location1"></i>{{$store.state.nowcity}}</router-link>
       <div class="search">
         <div class="search-index open-popup" data-target="#full">请输入商家关键字 <i class="iconfont icon-search"></i></div>
       </div>
@@ -56,20 +56,28 @@
     },
     // props: ['inputValue'],
     methods: {
-      submit: function () {
-        // 没写值不能搜索
-        if (this.shuru === '') {
-          return
-        }
-        this.shuruArr.push({name: this.shuru})  // 数组中添加对象, name:搜索值 , 方便v-for循环出来
-        // localStorage.setItem('hisArr', this.shuruArr)  // 存到本地缓存
-        localStorage.hisArr.setItem(this.shuru)
-        this.shuru = ''  // 清空搜索值
-      },
-      clear: function () {
-        localStorage.removeItem('hisArr')
+    submit: function () {
+      // 没写值不能搜索
+      if (this.shuru === '') {
+        return
       }
+      this.shuruArr.push({name: this.shuru})  // 数组中添加对象, name:搜索值 , 方便v-for循环出来
+      // localStorage.setItem('hisArr', this.shuruArr)  // 存到本地缓存
+      localStorage.hisArr.setItem(this.shuru)
+      this.shuru = ''  // 清空搜索值
+    },
+    clear: function () {
+      localStorage.removeItem('hisArr')
     }
+  },
+  mounted: function () {
+
+      this.$http.get('http://cangdu.org:8001/v1/cities?type=guess').then( response => {
+      // console.log(response)
+      this.$store.state.nowcity = response.body.name
+    })
+  }
+  
   }
 </script>
 <style>

@@ -2,7 +2,7 @@
   <div>
     <div class="backBar">
       <router-link to="AddressManage" > <i class="iconfont icon-back"></i> </router-link>
-      <div class="title" v-text="title">亿人电贸</div>
+      <div class="title" v-text="title">亿人共享</div>
     </div>
     <div class="addr-add">
       <div class="title">联系方式</div>

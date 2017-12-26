@@ -2,7 +2,7 @@
   <div id="product">
     <div class="backBar">
       <router-link to="/" > <i class="iconfont icon-back"></i> </router-link>
-      <div class="title" v-text="title">亿人电贸</div>
+      <div class="title" v-text="title">亿人共享</div>
     </div>
   <div class="swiper-container">
     <!-- Additional required wrapper -->
