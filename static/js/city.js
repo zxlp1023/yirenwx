@@ -5,9 +5,9 @@ $(function () {
     //加载城市事件
     $('.container').show();
     //选择城市 start
-    $('body').on('click', '.city-list p', function () {
-        alert($(this).html())
-    });
+   /*  $('body').on('click', '.city-list p', function () {
+        // alert($(this).html())
+    }); */
     //点击索引查询城市
     $('body').on('click', '.letter a', function () {
         var s = $(this).html();

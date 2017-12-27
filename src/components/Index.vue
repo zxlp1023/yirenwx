@@ -92,6 +92,9 @@ export default {
       ]
     }
   },
+  mounted: function () {
+    
+  },
   components: { Search, Banner }
 }
 </script>

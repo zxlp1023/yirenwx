@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="searchBar p05">
-      <router-link to="City" class="city"><i class="icon iconfont icon-location1"></i>{{$store.state.nowcity}}</router-link>
+      <router-link to="City" class="city"><i class="icon iconfont icon-location1"></i>{{$store.state.nowcity.name}}</router-link>
       <div class="search">
         <div class="search-index open-popup" data-target="#full">请输入商家关键字 <i class="iconfont icon-search"></i></div>
       </div>
@@ -15,7 +15,7 @@
               <div class="weui-search-bar__box">
                 <i class="weui-icon-search iconfont icon-search"></i>
                 <!-- <i class="fonticon fonticon-search"></i> -->
-                <input v-model="shuru" @keyup.enter="submit" type="search" class="weui-search-bar__input" id="searchInput" placeholder="请输入店名或菜品" required="">
+                <input v-model="inputvalue"  type="search" class="weui-search-bar__input" id="searchInput" placeholder="请输入店名或菜品" required="" @keyup.enter="searchPros">
                 <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
               </div>
               <label class="weui-search-bar__label" id="searchText" style="transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1);">
@@ -26,18 +26,39 @@
             <a  href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
           </div>
         </div>
-        <ul class="s-history">
-          <div class="title"><i @click="clear" class="iconfont icon-trash fr"></i> 历史搜索</div>
-          <!-- <a v-for="i in searchHistory " href="javascript:;">{{i.name}}</a> -->
-          <a  href="javascript:;">11</a>
-          <a v-for="i in shuruArr" href="javascript:;">{{i.name}}</a>
-     
-          <button @click="submit">搜索</button>
+        <ul class="s-history" v-if="his!==''">
+          <div class="title"><i class="iconfont icon-trash fr" @click="removehis"></i> 历史搜索</div>
+          <a href="javascript:;" v-for="item in his">{{item.name}}</a>
         </ul>
+        <div class="weui-panel pro-index search-list" v-if="list !== ''" >
+          <div class="weui-panel__bd" v-for="item in list" @click="goaddress({name:item.address,url:item.geohash})">
+            <a class="weui-media-box weui-media-box_appmsg" >      
+              <div class="weui-media-box__hd">
+                <img class="weui-media-box__thumb" src="../../src/assets/img/up/2.jpg" alt="">
+              </div>
+              <div class="weui-media-box__bd">
+                <h4 class="weui-media-box__title">NEW新款上新</h4>
+                <p class="weui-media-box__desc">年度新款等您来抢2</p>
+                <div class="item-star">
+                  <span class="star star-50"></span>
+                  <span>4.8</span>
+                </div>
+                <div class="item-price">
+                  <span class="price">111.00</span>
+                  <span class="buyers">2311</span>
+                </div>
+              </div>
+            <!-- </a> -->
+            </a>
+          </div>
+
+        </div>
       </div>
     </div>
   </div>
 </template>
+
+
 <script>
   /* var searchArr = [] ;
   if (localStorage.search) {
@@ -49,39 +70,65 @@
     name: 'Search',
     data () {
       return {
-        shuru: '',
-        shuruArr: [],
-        hisArr: localStorage.his
+        inputvalue: '',
+        list: '',
+        his: ''
       }
     },
-    // props: ['inputValue'],
     methods: {
-    submit: function () {
-      // 没写值不能搜索
-      if (this.shuru === '') {
-        return
+      searchPros: function(){
+        this.$http.get('http://cangdu.org:8001/v1/pois?city_id='+this.$store.state.nowcity.id+'&keyword='+this.inputval+'&type=searchhttp://cangdu.org:8001/v1/pois?city_id=5&keywords=' + this.inputvalue + '&type=search').then( response => {
+          console.log(response)
+          // console.log(this.$store.state.nowcity)
+          this.list = response.body
+          
+          // 如果没有搜到内容
+          if (response.body == ''){
+            Toast('抱歉,没有找到相关产品')
+          }
+        })
+      },
+      goaddress: function(e){
+        var arr = []
+        if(localStorage.getItem('his')){
+          arr = JSON.parse(localStorage.getItem('his'))
+          for( let i=0; i<arr.length; i++){
+            if (arr[i].name == e.name) {
+              var isok = true
+            }
+          }
+          if(!isok){
+            arr.unshift(e)
+          }
+        }else{
+          arr.unshift(e)
+        }
+        localStorage.setItem('his',JSON.stringify(arr))
+        this.his = JSON.parse(localStorage.getItem('his'))
+        this.list = ''
+      },
+      removehis: function () {
+        localStorage.removeItem('his')
+        this.his = ''
       }
-      this.shuruArr.push({name: this.shuru})  // 数组中添加对象, name:搜索值 , 方便v-for循环出来
-      // localStorage.setItem('hisArr', this.shuruArr)  // 存到本地缓存
-      localStorage.hisArr.setItem(this.shuru)
-      this.shuru = ''  // 清空搜索值
-    },
-    clear: function () {
-      localStorage.removeItem('hisArr')
-    }
   },
   mounted: function () {
+/*     // 定位当前城市
+    this.$http.get('http://cangdu.org:8001/v1/cities?type=guess').then( response => {
+    // console.log(response)
+    this.$store.state.nowcity = response.body
+    }) */
 
-      this.$http.get('http://cangdu.org:8001/v1/cities?type=guess').then( response => {
-      // console.log(response)
-      this.$store.state.nowcity = response.body.name
-    })
+    //检查默认有没有本地缓存
+    if(localStorage.getItem('his')){
+      this.his = JSON.parse(localStorage.getItem('his'))
+    }   
+
   }
   
   }
 </script>
-<style>
-/* 
+<style <style lang="scss">
 
- */
 </style>
+

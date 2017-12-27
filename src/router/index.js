@@ -27,9 +27,9 @@ Vue.use(Router)
 
 export default new Router({
   routes: [{
-      path: '/',
-      component: App,
-      children: [
+    path: '/',
+    component: App,
+    children: [
         {
           path: '',
           redirect: '/Index'

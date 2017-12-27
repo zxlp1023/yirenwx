@@ -7,7 +7,7 @@ import mutations from './mutations'
 Vue.use(Vuex)
 
 const state = {
-  nowcity: ''
+  nowcity: {name: '', id: ''}
 }
 
 export default new Vuex.Store({

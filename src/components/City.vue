@@ -5,28 +5,14 @@
       <div class="title" v-text="title">亿人共享</div>
     </div>
     <div class="cityBox">
-      <div class="weui-search-bar" id="searchBar">
-        <form class="weui-search-bar__form" action="#">
-          <div class="weui-search-bar__box">
-            <i class="weui-icon-search iconfont icon-search"></i>
-            <input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索" required="">
-            <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
-          </div>
-          <label class="weui-search-bar__label" id="searchText" style="transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1);">
-            <i class="weui-icon-search iconfont icon-search"></i>
-            <span>搜索</span>
-          </label>
-        </form>
-        <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
-      </div>  <!-- search bar -->
+      <city-search></city-search>
+      <!-- 热门城市 -->
       <div class="hotCity">
-        <div class="title"><i class="iconfont icon-location2"></i>{{$store.state.nowcity}}</div>
+        <div class="title"><i class="iconfont icon-location2"></i>{{$store.state.nowcity.name}}</div>
         <div class="cityTab">
-          <!-- <router-link  tag="li" v-for="item in hotcity" :to="'/city/' + item.id" :key="item.id">
-            {{item.name}}
-          </router-link>   -->
-          <router-link @click="gocity(item.name)" v-for="item in hotcity" :to="SelectCity" :key='item.id'> {{item.name}}</router-link>
-          <!-- <router-link v-for="item in hotcity" :to="'/City/' + item.id" :key='item.id'> {{item.name}}</router-link> -->
+          <!-- <router-link @click="gocity(item.name)" v-for="item in hotcity" :to="'/City/' + item.id" :key='item.id'> {{item.name}}</router-link> -->
+          <span @click="goindex({name:item.name,id:item.id})" v-for="item in hotcity" :key='item.id'>{{item.name}}</span>
+          
         </div>
       </div>
     </div> <!-- / hot city -->
@@ -110,12 +96,10 @@
     <div class="container">
       <div class="city">
         <div class="city-list" v-for="(items,index) in getlist">
-          <span class="city-letter" :id="(index)+1" v-text="index"></span>
-          <!-- <mt-cell class="city-letter" :title="index" :id="(index)+1"></mt-cell> -->
+          <div class="city-letter" :id="(index)+1" v-text="index"></div>
 
-          <!-- <p v-for="item in items">{{item.name}}</p> -->
-          <!-- <router-link v-for="item in items" :to="'/city/' + item.id" :key='item.id'> {{item.name}}</router-link> -->
-          <router-link @click="gocity" v-for="item in items" :to="'/City/'+ item.id" :key='item.id'>{{item.name}} </router-link>
+          <!-- <router-link @click="gocity" v-for="item in items" :to="'/City/'+ item.id" :key='item.id'>{{item.name}} </router-link> -->
+          <p @click="goindex({name:item.name,id:item.id})" v-for="item in items"  :key='item.id'>{{item.name}} </p>
         </div>
         
       </div>
@@ -124,6 +108,8 @@
 </template>
 <script>
   import '../assets/style/city.css'
+  import CitySearch from '@/components/CitySearch'
+
   export default {
     name: 'City',
     data () {
@@ -134,17 +120,13 @@
         citylist: ''
       }
     },
-    methods: {
-      gocity: function (e) {
-        this.$router.push('city')
-        this.$store.state.nowcity = e
-      }
-    },
     mounted: function () {
     //定位城市
     this.$http.get('http://cangdu.org:8001/v1/cities?type=guess').then( response => {
-      // console.log(response)
-      this.$store.state.nowcity = response.body.name
+      this.$store.state.nowcity.name = response.body.name
+      // console.log(this.$store.state.nowcity.name)
+      // console.log(111111111)
+      // console.log(response.body.name)
     })
 
     //热门城市
@@ -160,17 +142,24 @@
     }), response => {
       // console.log(response)
     }
-
   },
-  computed: {
-    getlist: function () {
-      var mycitylist = {}
-      for(let i=65; i<=90; i++){
-        let num = String.fromCharCode(i)
-        mycitylist[num] = this.citylist[num]
+    methods: {
+        goindex: function (e) {
+          this.$router.push('Index')
+          this.$store.state.nowcity = e
+          // alert(e)
+        }
+      },
+    computed: {
+      getlist: function () {
+        var mycitylist = {}
+        for (let i = 65; i <= 90; i++) {
+          let num = String.fromCharCode(i)
+          mycitylist[num] = this.citylist[num]
+        }
+        return mycitylist
       }
-      return mycitylist
-    }
-  }
+    },
+    components: {CitySearch}
 }
 </script>
