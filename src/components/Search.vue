@@ -1,7 +1,9 @@
 <template>
   <div>
     <div class="searchBar p05">
-      <router-link to="City" class="city"><i class="icon iconfont icon-location1"></i>{{$store.state.nowcity.name}}</router-link>
+      <!-- 如果选择的城市存在,就显示它, 否则显示默认定位的城市 -->
+      <router-link to="City" class="city" v-if=" this.$store.state.selectcity.name !== '' "><i class="icon iconfont icon-location1"></i>{{this.$store.state.selectcity.name}}</router-link>
+      <router-link to="City" class="city" v-else=""><i class="icon iconfont icon-location1"></i>{{this.$store.state.nowcity.name}}</router-link>
       <div class="search">
         <div class="search-index open-popup" data-target="#full">请输入商家关键字 <i class="iconfont icon-search"></i></div>
       </div>
@@ -60,73 +62,78 @@
 
 
 <script>
-  /* var searchArr = [] ;
-  if (localStorage.search) {
-    searchArr = localStorage.search.split(",")
-  } else {
-    searchArr = [];
-    } */
-  export default {
-    name: 'Search',
-    data () {
-      return {
-        inputvalue: '',
-        list: '',
-        his: ''
-      }
-    },
-    methods: {
-      searchPros: function(){
-        this.$http.get('http://cangdu.org:8001/v1/pois?city_id='+this.$store.state.nowcity.id+'&keyword='+this.inputval+'&type=searchhttp://cangdu.org:8001/v1/pois?city_id=5&keywords=' + this.inputvalue + '&type=search').then( response => {
-          console.log(response)
-          // console.log(this.$store.state.nowcity)
-          this.list = response.body
-          
-          // 如果没有搜到内容
-          if (response.body == ''){
-            Toast('抱歉,没有找到相关产品')
-          }
-        })
-      },
-      goaddress: function(e){
-        var arr = []
-        if(localStorage.getItem('his')){
-          arr = JSON.parse(localStorage.getItem('his'))
-          for( let i=0; i<arr.length; i++){
-            if (arr[i].name == e.name) {
-              var isok = true
-            }
-          }
-          if(!isok){
-            arr.unshift(e)
-          }
-        }else{
-          arr.unshift(e)
-        }
-        localStorage.setItem('his',JSON.stringify(arr))
-        this.his = JSON.parse(localStorage.getItem('his'))
-        this.list = ''
-      },
-      removehis: function () {
-        localStorage.removeItem('his')
-        this.his = ''
-      }
+import { Toast } from "mint-ui";
+export default {
+  name: "Search",
+  data () {
+    return {
+      inputvalue: "",
+      list: "",
+      his: ""
+    };
   },
-  mounted: function () {
-/*     // 定位当前城市
-    this.$http.get('http://cangdu.org:8001/v1/cities?type=guess').then( response => {
-    // console.log(response)
-    this.$store.state.nowcity = response.body
-    }) */
+  methods: {
+    searchPros: function () {
+      this.$http
+        .get(
+          "http://cangdu.org:8001/v1/pois?city_id=" +
+            this.$store.state.nowcity.id +
+            "&keyword=" +
+            this.inputvalue +
+            "&type=search"
+        )
+        .then(response => {
+          console.log(response);
+          // console.log(this.$store.state.nowcity)
+          this.list = response.body;
+
+          // 如果没有搜到内容
+          if (response.body == "") {
+            Toast("抱歉,没有找到相关产品");
+          }
+        });
+    },
+    goaddress: function(e) {
+      var arr = [];
+      if (localStorage.getItem("his")) {
+        arr = JSON.parse(localStorage.getItem("his"));
+        for (let i = 0; i < arr.length; i++) {
+          if (arr[i].name == e.name) {
+            var isok = true;
+          }
+        }
+        if (!isok) {
+          arr.unshift(e);
+        }
+      } else {
+        arr.unshift(e);
+      }
+      localStorage.setItem("his", JSON.stringify(arr));
+      this.his = JSON.parse(localStorage.getItem("his"));
+      this.list = "";
+    },
+    removehis: function() {
+      localStorage.removeItem("his");
+      this.his = "";
+    }
+  },
+  mounted: function() {
+    // 获取定位
+    this.$http
+      .get("http://cangdu.org:8001/v1/cities?type=guess")
+      .then(response => {
+        this.$store.state.nowcity = response.body;
+      });
 
     //检查默认有没有本地缓存
-    if(localStorage.getItem('his')){
-      this.his = JSON.parse(localStorage.getItem('his'))
-    }   
-
+    if (localStorage.getItem("his")) {
+      this.his = JSON.parse(localStorage.getItem("his"));
+    }
+    /*     console.log(111111)
+    console.log(this.$store.state.nowcity.name + this.$store.state.nowcity.id)
+    console.log(this.$store.state.selectcity.name +this.$store.state.selectcity.id) */
   }
-  
-  }
+};
 </script>
 <style <style lang="scss">
 

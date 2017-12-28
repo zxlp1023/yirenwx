@@ -7,7 +7,8 @@ import mutations from './mutations'
 Vue.use(Vuex)
 
 const state = {
-  nowcity: {name: '', id: ''},
+  nowcity: { name: '', id: '' },
+  selectcity: {name: '', id: ''},
   select: 'index'
 }
 

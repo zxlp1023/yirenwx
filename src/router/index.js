@@ -30,121 +30,121 @@ export default new Router({
     path: '/',
     component: App,
     children: [
-        {
-          path: '',
-          redirect: '/Index'
+      {
+        path: '',
+        redirect: '/Index'
 
-        },
-        {
-          path: '/Index',
-          name: 'Index',
-          component: Index
-        },
-        {
-          path: '/City',
-          name: 'City',
-          component: City
-        },
-        { // 选择城市
-          path: '/City/:cityid',
-          name: 'SelectCity',
-          component: Index
-        },
-        {
-          path: '/Product',
-          name: 'Product',
-          component: Product
-        },
-        {
-          path: '/ProductComments',
-          name: 'ProductComments',
-          component: ProductComments
-        },
-        {
-          path: '/OrderConfirm',
-          name: 'OrderConfirm',
-          component: OrderConfirm
-        },
-        {
-          path: '/pay',
-          name: 'Pay',
-          component: Pay
-        },
-        {
-          path: '/payok',
-          name: 'Payok',
-          component: Payok
-        },
-        {
-          path: '/OrderDetail',
-          name: 'OrderDetail',
-          component: OrderDetail
-        },
-        {
-          path: '/Phone',
-          name: 'Phone',
-          component: Phone
-        },
-        {
-          path: '/PhoneSend',
-          name: 'PhoneSend',
-          component: PhoneSend
-        },
-        {
-          path: '/PhoneAgree',
-          name: 'PhoneAgree',
-          component: PhoneAgree
-        },
-        {
-          path: '/Financial',
-          name: 'Financial',
-          component: Financial
-        },
-        {
-          path: '/My',
-          name: 'My',
-          component: My
-        },
-        {
-          path: '/Wallet',
-          name: 'Wallet',
-          component: Wallet
-        },
-        {
-          path: '/Invite',
-          name: 'Invite',
-          component: Invite
-        },
-        {
-          path: '/AddressManage',
-          name: 'AddressManage',
-          component: AddressManage
-        },
-        {
-          path: '/AddressAdd',
-          name: 'AddressAdd',
-          component: AddressAdd
-        },
-        {
-          path: '/Logistics',
-          name: 'Logistics',
-          component: Logistics
-        },
-        {
-          path: '/Cart',
-          name: 'Cart',
-          component: Cart
-        },
-        {
-          path: '/TopUp',
-          name: 'TopUp',
-          component: TopUp
-        },
-        {
-          path: '/Withdraw',
-          name: 'Withdraw',
-          component: Withdraw
-        }
-      ]
+      },
+      {
+        path: '/Index',
+        name: 'Index',
+        component: Index
+      },
+      {
+        path: '/City',
+        name: 'City',
+        component: City
+      },
+      { // 选择城市
+        path: '/City/:cityid',
+        name: 'SelectCity',
+        component: Index
+      },
+      {
+        path: '/Product',
+        name: 'Product',
+        component: Product
+      },
+      {
+        path: '/ProductComments',
+        name: 'ProductComments',
+        component: ProductComments
+      },
+      {
+        path: '/OrderConfirm',
+        name: 'OrderConfirm',
+        component: OrderConfirm
+      },
+      {
+        path: '/pay',
+        name: 'Pay',
+        component: Pay
+      },
+      {
+        path: '/payok',
+        name: 'Payok',
+        component: Payok
+      },
+      {
+        path: '/OrderDetail',
+        name: 'OrderDetail',
+        component: OrderDetail
+      },
+      {
+        path: '/Phone',
+        name: 'Phone',
+        component: Phone
+      },
+      {
+        path: '/PhoneSend',
+        name: 'PhoneSend',
+        component: PhoneSend
+      },
+      {
+        path: '/PhoneAgree',
+        name: 'PhoneAgree',
+        component: PhoneAgree
+      },
+      {
+        path: '/Financial',
+        name: 'Financial',
+        component: Financial
+      },
+      {
+        path: '/My',
+        name: 'My',
+        component: My
+      },
+      {
+        path: '/Wallet',
+        name: 'Wallet',
+        component: Wallet
+      },
+      {
+        path: '/Invite',
+        name: 'Invite',
+        component: Invite
+      },
+      {
+        path: '/AddressManage',
+        name: 'AddressManage',
+        component: AddressManage
+      },
+      {
+        path: '/AddressAdd',
+        name: 'AddressAdd',
+        component: AddressAdd
+      },
+      {
+        path: '/Logistics',
+        name: 'Logistics',
+        component: Logistics
+      },
+      {
+        path: '/Cart',
+        name: 'Cart',
+        component: Cart
+      },
+      {
+        path: '/TopUp',
+        name: 'TopUp',
+        component: TopUp
+      },
+      {
+        path: '/Withdraw',
+        name: 'Withdraw',
+        component: Withdraw
+      }
+    ]
   }]
 })

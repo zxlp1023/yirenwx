@@ -85,8 +85,13 @@
     name: 'Prodoct',
     data () {
       return {
-        title: '商品详情'
+        title: '商品详情',
+        grade1: '3.2',
+        grade2: '4.6',
       }
+    },
+    mounted: function () {
+      
     }
   }
 </script>

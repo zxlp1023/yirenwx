@@ -30,7 +30,8 @@
   export default {
     name: 'Foot',
     data () {
-      
+        return {
+      }
     }
   }
 </script>

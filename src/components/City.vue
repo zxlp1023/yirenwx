@@ -117,18 +117,19 @@
         title: '城市',
         // nowcity: '',
         hotcity: '',
-        citylist: ''
+        citylist: '',
+        selectcity: ''
       }
     },
     mounted: function () {
     //定位城市
-    this.$http.get('http://cangdu.org:8001/v1/cities?type=guess').then( response => {
-      this.$store.state.nowcity.name = response.body.name
+    /* this.$http.get('http://cangdu.org:8001/v1/cities?type=guess').then( response => {
+      this.$store.state.nowcity = response.body
       // console.log(this.$store.state.nowcity.name)
       // console.log(111111111)
       // console.log(response.body.name)
-    })
-
+    })  
+ */
     //热门城市
     this.$http.get('http://cangdu.org:8001/v1/cities?type=hot').then( response => {
       // console.log(response)
@@ -143,23 +144,23 @@
       // console.log(response)
     }
   },
-    methods: {
-        goindex: function (e) {
-          this.$router.push('Index')
-          this.$store.state.nowcity = e
-          // alert(e)
-        }
-      },
-    computed: {
-      getlist: function () {
-        var mycitylist = {}
-        for (let i = 65; i <= 90; i++) {
-          let num = String.fromCharCode(i)
-          mycitylist[num] = this.citylist[num]
-        }
-        return mycitylist
+  methods: {
+      goindex: function (e) {
+        this.$router.push('Index')
+        this.$store.state.selectcity = e
+        // alert(e)
       }
     },
-    components: {CitySearch}
+  computed: {
+    getlist: function () {
+      var mycitylist = {}
+      for (let i = 65; i <= 90; i++) {
+        let num = String.fromCharCode(i)
+        mycitylist[num] = this.citylist[num]
+      }
+      return mycitylist
+    }
+  },
+  components: {CitySearch}
 }
 </script>
