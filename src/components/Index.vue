@@ -10,10 +10,10 @@
   <banner></banner>
   <div class="weui-panel pro-index">
     <div class="weui-panel__bd">
-      <router-link to="Product" class="weui-media-box weui-media-box_appmsg" v-for="i in pros" :key="i.id">      
+      <router-link to="Product" class="weui-media-box weui-media-box_appmsg" v-for="i in pros" :key="i.id" >      
       <!-- <a href="msg-product.html" class="weui-media-box weui-media-box_appmsg" v-for="i in pros"> -->
         <div class="weui-media-box__hd">
-          <img class="weui-media-box__thumb" :src="i.img" alt="">
+          <img class="weui-media-box__thumb" :src="imgshopUrl + i.image_path" alt="">
         </div>
         <div class="weui-media-box__bd">
           <h4 class="weui-media-box__title">{{ i.title }}</h4>
@@ -44,7 +44,9 @@ export default {
   data () {
     return {
       title: '亿人共享',
-      pros: [
+      pros: [],
+      imgshopUrl: 'http://cangdu.org:8001/img/'
+/*       pros: [
         {
           id: 1,
           img: '../../src/assets/img/up/2.jpg',
@@ -65,10 +67,18 @@ export default {
           buyer: '123',
           url: 'url'
         }
-      ]
+      ] */
     }
   },
   mounted: function () {
+    this.$http.get('http://cangdu.org:8001/shopping/restaurants?latitude=31.22967&longitude=121.4762').then(response => {
+      console.log(response);
+      this.pros=response.body;
+    }, response => {
+      console.log(response);
+      console.log(this.pros);
+    });
+    
   },
   components: { Search, Banner, Foot }
 }

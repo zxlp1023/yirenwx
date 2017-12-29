@@ -73,40 +73,6 @@
   
         </div>
   
-        <div class="weui-cell">
-  
-          <div class="weui-cell__hd pic">
-  
-            <a href="msg-product.html"> <img src="../assets/img/up/1.jpg" alt=""> </a>
-  
-          </div>
-  
-          <div class="weui-cell__bd">
-  
-            <div class="fz15"> <a class="weui-cell_access" href="msg-product.html">超人全身水洗旋转麻将机</a> </div>
-  
-            <div class="hui94 fz12">型号：<span class="pl10">花朵小罐</span></div>
-  
-            <div class="priceControl">
-  
-              <span class="price fz17 ">35800</span>
-  
-              <div class="weui-count fr">
-  
-                <a class="weui-count__btn weui-count__decrease"></a>
-  
-                <input class="weui-count__number" type="number" value="1">
-  
-                <a class="weui-count__btn weui-count__increase"></a>
-  
-              </div>
-  
-            </div>
-  
-          </div>
-  
-        </div>
-  
   
   
       </div>
