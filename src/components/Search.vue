@@ -17,7 +17,7 @@
               <div class="weui-search-bar__box">
                 <i class="weui-icon-search iconfont icon-search"></i>
                 <!-- <i class="fonticon fonticon-search"></i> -->
-                <input v-model="inputvalue"  type="search" class="weui-search-bar__input" id="searchInput" placeholder="请输入店名或菜品" required="" @keyup.enter="searchPros">
+                <input  @keyup.enter="searchPros" v-model="inputvalue"  type="search" class="weui-search-bar__input" id="searchInput" placeholder="请输入店名或菜品" required="">
                 <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
               </div>
               <label class="weui-search-bar__label" id="searchText" style="transform-origin: 0px 0px 0px; opacity: 1; transform: scale(1, 1);">
@@ -118,10 +118,9 @@ export default {
     }
   },
   mounted: function() {
+
     // 获取定位
-    this.$http
-      .get("http://cangdu.org:8001/v1/cities?type=guess")
-      .then(response => {
+    this.$http.get("http://cangdu.org:8001/v1/cities?type=guess").then(response => {
         this.$store.state.nowcity = response.body;
       });
 

@@ -76,13 +76,11 @@
      图片详情介绍
   </div>
   <div class="proFoot">
-    <a href="javascript:;" id='show-toast' class="weui-btn weui-btn_primary">加入购物车</a>
+    <a @click="addcart" href="javascript:;" id='show-toast' class="weui-btn weui-btn_primary">加入购物车</a>
     <router-link to="OrderConfirm" class="weui-btn weui-btn_warn">立即购买</router-link>
   </div>
   </div>
 </template>
-
-
 
 <script>
   export default {
@@ -92,7 +90,7 @@
         title: '商品详情',
         promsg: '',
         grade1: '3.5',
-        grade2: '4.6',
+        grade2: '5.0',
         score: '',
         starscore: 'star-',
         mycart : ''
@@ -153,7 +151,7 @@
       }
     },
     mounted: function () {
-      this.grade(this.grade1)  // 通过函数处理分数返回正确的分数
+      this.grade(this.grade2)  // 通过函数处理分数返回正确的分数
 
       // 商品信息
       this.$http.get('http://cangdu.org:8001/shopping/restaurant/1').then( response =>{
@@ -172,5 +170,6 @@
       })
       // console.log( this.grade(this.grade2)      
     }
+    
   }
 </script>

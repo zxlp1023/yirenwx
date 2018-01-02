@@ -30,16 +30,13 @@
         </router-link>
   
       </div>
-  
-  
-  
-  
+
   
       <div class="title fz14 ">购买清单</div>
   
       <div class="weui-cells list mt0">
   
-        <div class="weui-cell">
+        <div class="weui-cell" >
   
           <div class="weui-cell__hd pic">
   
@@ -59,11 +56,11 @@
   
               <div class="weui-count fr">
   
-                <a class="weui-count__btn weui-count__decrease"></a>
+                <a @click="minusNum"  class="weui-count__btn weui-count__decrease"></a>
   
-                <input class="weui-count__number" type="number" value="1">
+                <input class="weui-count__number" type="number"  v-model="num">
   
-                <a class="weui-count__btn weui-count__increase"></a>
+                <a @click="addNum" class="weui-count__btn weui-count__increase"></a>
   
               </div>
   
@@ -72,18 +69,16 @@
           </div>
   
         </div>
-  
-  
-  
+
       </div>
   
-      <div class="p075 fz15 carriage">
+<!--       <div class="p075 fz15 carriage">
   
         配送费 <span class="fr price">10</span>
   
-      </div>
+      </div> -->
   
-      <div class=" p075 fz14 needPay">应付 <span class=" red price pl10 fz17">172</span></div>
+      <div class=" p075 fz14 needPay">应付 <span class=" red price pl10 fz17">{{totalPrice}}</span></div>
   
     </div>
   
@@ -104,10 +99,7 @@
           </div>
   
           <div class="weui-cell__hd">
-  
             <router-link to="Pay" class="weui-btn weui-btn_warn btn-radius0">去支付</router-link>
-
-  
           </div>
   
         </div>
@@ -123,8 +115,39 @@
     name: 'OrderConfirm',
     data () {
       return {
-        title: '确认订单'
+        title: '确认订单',
+        num: 1,
+        price: 10,
+        totalPrice: 10
+        // pros:[{num:1,name:'a1'}]
       }
+    },
+    methods: {
+      totalPrice2: function () {
+        this.totalPrice = this.price * this.num
+      },
+      addNum: function () {
+        this.num = parseInt( this.num ) + 1
+        this.totalPrice2()
+        
+        
+      },
+      minusNum: function () {
+        if( this.num <=1 ){  // 数量不能小于1
+          return
+        }
+        this.num = parseInt( this.num ) - 1
+        this.totalPrice2()
+      }
+      
+    },
+    computed: {
+     /*  totalPrice: function () {
+        this.allPrice * 3
+        return  this.allPrice
+  
+      } */
     }
   }
 </script>
+

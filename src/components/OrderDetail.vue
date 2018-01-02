@@ -59,9 +59,9 @@
             <span class="fz14">商品总额</span>
             <span class="fr price">169.00</span>
           </p>
-          <p class="bb1">+ 运费
+<!--           <p class="bb1">+ 运费
             <span class="fr price">0.00</span>
-          </p>
+          </p> -->
           <p class="text-right fz14 ">
             <span>实际款:</span>
             <span class="price">169.00</span>
