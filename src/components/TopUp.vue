@@ -23,7 +23,7 @@
               <label class="weui-label">¥</label>
             </div>
             <div class="weui-cell__bd">
-              <input id="" class="weui-input " type="number" pattern="[0-9]*" placeholder="">
+              <input id="" class="weui-input " type="number" pattern="[0-9]*" placeholder="" autofocus>
             </div>
           </div>
         </div>

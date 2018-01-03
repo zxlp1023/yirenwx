@@ -52,7 +52,7 @@
   
             <div class="priceControl">
   
-              <span class="price fz17 ">35800</span>
+              <span class="price fz17 ">{{price}}</span>
   
               <div class="weui-count fr">
   
@@ -78,7 +78,7 @@
   
       </div> -->
   
-      <div class=" p075 fz14 needPay">应付 <span class=" red price pl10 fz17">{{totalPrice}}</span></div>
+      <!-- <div class=" p075 fz14 needPay">应付 <span class=" red price pl10 fz17">{{totalPrice}}</span></div> -->
   
     </div>
   
@@ -94,7 +94,7 @@
   
             合计:
   
-            <span class=" price fz16 ">35800</span>
+            <span class=" price fz16 ">{{totalPrice}}</span>
   
           </div>
   
@@ -117,10 +117,13 @@
       return {
         title: '确认订单',
         num: 1,
-        price: 10,
-        totalPrice: 10
+        price: 20,
+        totalPrice: ''
         // pros:[{num:1,name:'a1'}]
       }
+    },
+    created: function (){
+    
     },
     methods: {
       totalPrice2: function () {
@@ -141,12 +144,11 @@
       }
       
     },
+    mounted: function () {
+     this.totalPrice = this.price * this.num
+    },
     computed: {
-     /*  totalPrice: function () {
-        this.allPrice * 3
-        return  this.allPrice
-  
-      } */
+     
     }
   }
 </script>

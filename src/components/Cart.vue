@@ -5,15 +5,8 @@
       <div class="title" v-text="title">亿人共享</div>
     </div>
     <div class="cart">
-      <mt-cell-swipe
-      title=""
-      :right="[
-        {
-          content: '删除',
-          style: { background: '#f43b3e', color: '#fff' },
-          handler: () => this.$messagebox('删除成功')
-        }
-      ]">
+      <mt-cell-swipe title="" :right="[{content: '删除',style: { background: '#f43b3e', color: '#fff' },
+          handler: () => this.$messagebox('删除成功') }]">
         <div class="weui-cell weui-cell_swiped">
           <div class="weui-cell__bd" style="transform: translate3d(0px, 0px, 0px);">
             <div class="weui-cell pl10">
@@ -32,9 +25,9 @@
                 <div class="priceControl">
                   <span class="price fz15">35800</span>
                   <div class="weui-count">
-                    <a class="weui-count__btn weui-count__decrease"></a>
-                    <input class="weui-count__number" type="number" value="1">
-                    <a class="weui-count__btn weui-count__increase"></a>
+                    <a @click="minusNum"  class="weui-count__btn weui-count__decrease"></a>
+                    <input class="weui-count__number" type="number"  v-model="num">
+                    <a @click="addNum" class="weui-count__btn weui-count__increase"></a>
                   </div>
                 </div>
               </div>
@@ -47,41 +40,7 @@
           </div> -->
         </div>
       </mt-cell-swipe>
-      
-      <div class="weui-cell weui-cell_swiped">
-        <div class="weui-cell__bd" style="transform: translate3d(0px, 0px, 0px);">
-          <div class="weui-cell pl10">
-            <div class="weui-cell__hd weui-cells_checkbox">
-              <label class=" weui-check__label" for="s2">
-                <input type="checkbox" class="weui-check" name="checkbox1" id="s2" >
-                <i class="weui-icon-checked"></i>
-              </label>
-            </div>
-            <div class="weui-cell__hd pic">
-              <a href="msg-product.html"><img src="../assets/img/up/2.png" alt="" ></a>
-            </div>
-            <div class="weui-cell__bd">
-              <div class="fz15"><a class="weui-cell_access" href="msg-product.html">超人全身水洗旋转麻将机</a></div>
-              <div class="hui94 fz13">香槟金</div>
-              <div class="priceControl">
-                <span class="price fz15">35800</span>
-                <div class="weui-count">
-                  <a class="weui-count__btn weui-count__decrease"></a>
-                  <input class="weui-count__number" type="number" value="1">
-                  <a class="weui-count__btn weui-count__increase"></a>
-                </div>
-              </div>
-            </div>
-            <div class="weui-cell__ft">
-            </div>
-          </div>
-        </div>
-        <div class="weui-cell__ft">
-          <a class="weui-swiped-btn weui-swiped-btn_warn delete-swipeout" href="javascript:">删除</a>
-        </div>
-      </div>
 
-    
     </div> <!-- /cart -->
     <div class="cartFoot">
       <div class="weui-cells weui-cells_checkbox fz15">
@@ -105,17 +64,45 @@
   </div>
 </template>
 <script>
+
   export default {
     name: 'Cart',
     data () {
       return {
-        title: '购物车'
+        title: '购物车',
+        num: 1,
+        mycart: ''
       }
+    },
+    created: function () {
+      
+    },
+    methods: {
+      totalPrice2: function () {
+        this.totalPrice = this.price * this.num
+      },
+      addNum: function () {
+        this.num = parseInt( this.num ) + 1
+        this.totalPrice2()
+      },
+      minusNum: function () {
+        if( this.num <=1 ){  // 数量不能小于1
+          return
+        }
+        this.num = parseInt( this.num ) - 1
+        this.totalPrice2()
+      }
+    },
+    mounted: function () {
+      
     }
   }
+  
 </script>
 <style>
 .mint-cell-title{ display: none}
-.mint-cell-wrapper{ padding: 0;}
+.mint-cell-wrapper{ padding: 0; line-height: 1.6;}
 .mint-cell-swipe-button{ display: flex; align-items: center}
+.mint-cell-value{ flex: 1; color:inherit; }
+.weui-cell_swiped{ flex: 1; }
 </style>

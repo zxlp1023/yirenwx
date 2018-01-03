@@ -37,3 +37,20 @@ new Vue({
   template: '<App/>',
   components: { App }
 })
+
+// 添加全局方法
+function totalPrice2 () {
+  this.totalPrice = this.price * this.num
+}
+function addNum  () {
+  this.num = parseInt(this.num) + 1
+  this.totalPrice2()
+
+}
+function minusNum () {
+  if (this.num <= 1) {  // 数量不能小于1
+    return
+  }
+  this.num = parseInt(this.num) - 1
+  this.totalPrice2()
+}

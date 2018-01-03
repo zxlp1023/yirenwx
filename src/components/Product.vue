@@ -76,8 +76,8 @@
      图片详情介绍
   </div>
   <div class="proFoot">
-    <a @click="addcart" href="javascript:;" id='show-toast' class="weui-btn weui-btn_primary">加入购物车</a>
-    <router-link to="OrderConfirm" class="weui-btn weui-btn_warn">立即购买</router-link>
+    <a @click="addcart({id:promsg.id,phone:promsg.phone})" href="javascript:;" id="show-toast"  class="weui-btn weui-btn_primary">加入购物车</a>
+    <a @click="buyNow({id:promsg.id,phone:promsg.phone})" class="weui-btn weui-btn_warn">立即购买</a>
   </div>
   </div>
 </template>
@@ -87,6 +87,7 @@
     name: 'Prodoct',
     data () {
       return {
+        id:'',
         title: '商品详情',
         promsg: '',
         grade1: '3.5',
@@ -96,24 +97,36 @@
         mycart : ''
       }
     },
+    created: function () {
+      //实例被创建完成后立即调用, 获取url参数中的id, 用来请求商品信息和评论
+      this.id = this.$route.query.id
+      console.log(this.id )
+    },
     methods: {
       // 加入购物车
       addcart: function (e) {
         const that = this
+
+        if(this.id == undefined) { // 如果没有产品id, 不加入购物车
+              return
+        }  
         if (localStorage.getItem('mycart')) {
           const mycart = JSON.parse(localStorage.getItem('mycart'))
           let addok = true
           for (let i=0; i< mycart.length; i++) {
-            if (mycart.pro.item_id == e.item_id) { // 如果商品ID相同, 则数量加1
-              mycart[i].num = mycart[i].num +1
+            if (mycart[i].pro.id == e.id) { // 如果缓存中商品ID 和 点击购买的商品ID相同, 则数量加1
+              // mycart[i].num = mycart[i].num +1  //数量 +1              
               addok = false
               break;
             }
+            
           }
 
+          
           if(addok){  // 如果addok为真, 则添加商品到缓存
             mycart.push({'pro':e,'num':1})
           }
+          
 
           that.cart = mycart
           localStorage.setItem('mycart',JSON.stringify(mycart))
@@ -122,8 +135,11 @@
           that.cart = mycart
           localStorage.setItem('mycart',JSON.stringify(mycart))
         }
-      },
-      
+        
+      },     
+      buyNow: function (e) {
+        this.$router.push({path:'/OrderConfirm',query:{id:e.id,phone:e.phone}})  // 立即购买传参
+      }, 
       // 处理评分
       grade: function ( fen ) {
         let [a,b,c] = ['','','']
@@ -149,12 +165,14 @@
           }
         }
       }
+      
     },
     mounted: function () {
+      
       this.grade(this.grade2)  // 通过函数处理分数返回正确的分数
 
       // 商品信息
-      this.$http.get('http://cangdu.org:8001/shopping/restaurant/1').then( response =>{
+      this.$http.get('http://cangdu.org:8001/shopping/restaurant/' + this.id).then( response =>{
         // console.log(response);
         this.promsg = response.body;
       }, response => {
@@ -162,13 +180,16 @@
       })
 
       // 评价展示
-      this.$http.get('http://cangdu.org:8001/ugc/v2/restaurants/1/ratings?offset=0&limit=10').then(response => {
+      this.$http.get('http://cangdu.org:8001/ugc/v2/restaurants/'+ this.id +'/ratings?offset=0&limit=2').then(response => {
         console.log(response)
         this.commentsTwo = response.body
       }, response => {
         console.log(response)
       })
-      // console.log( this.grade(this.grade2)      
+      // console.log( this.grade(this.grade2)    
+      
+      
+
     }
     
   }

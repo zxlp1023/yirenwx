@@ -23,7 +23,7 @@
             <label class="weui-label">¥</label>
           </div>
           <div class="weui-cell__bd">
-            <input id="withdraw" class="weui-input " type="number" pattern="[0-9]*" placeholder="">
+            <input id="withdraw" class="weui-input " type="number" pattern="[0-9]*" placeholder="" autofocus>
           </div>
         </div>
         <!-- <p class="fz13 hui72 bt1"><span>可提现金额</span> <span id="balance">429.00</span> 元 <span id="allOut" class="fr red">全部提现</span></p> -->

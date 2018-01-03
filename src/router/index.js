@@ -33,7 +33,6 @@ export default new Router({
       {
         path: '',
         redirect: '/Index'
-
       },
       {
         path: '/Index',

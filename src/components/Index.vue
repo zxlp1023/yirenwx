@@ -9,25 +9,24 @@
   </div> <!--/header-->
   <banner></banner>
   <div class="weui-panel pro-index">
-    <div class="weui-panel__bd">
-      <router-link to="Product" class="weui-media-box weui-media-box_appmsg" v-for="i in pros" :key="i.id" >      
-      <!-- <a href="msg-product.html" class="weui-media-box weui-media-box_appmsg" v-for="i in pros"> -->
+    <div class="weui-panel__bd">        
+      <router-link  v-for="item in pros" :key="item.id"  :to="{path:'/Product', query: {id: item.id}}" class="weui-media-box weui-media-box_appmsg" >      
+      <!-- <router-link to="{path:'/Product', query: {id: item.id}}" class="weui-media-box weui-media-box_appmsg" v-for="item in pros" :key="item.id" >       -->
         <div class="weui-media-box__hd">
-          <img class="weui-media-box__thumb" :src="imgshopUrl + i.image_path" alt="">
+          <img class="weui-media-box__thumb" :src="imgshopUrl + item.image_path" alt="">
         </div>
         <div class="weui-media-box__bd">
-          <h4 class="weui-media-box__title">{{ i.title }}</h4>
-          <p class="weui-media-box__desc">{{i.subTitle}}</p>
+          <h4 class="weui-media-box__title">{{ item.title }}</h4>
+          <p class="weui-media-box__desc">{{item.subTitle}}</p>
           <div class="item-star">
             <span class="star star-50"></span>
-            <span>{{i.start}}</span>
+            <span>{{item.start}}</span>
           </div>
           <div class="item-price">
-            <span class="price">{{i.price}}</span>
-            <span class="buyers">{{i.buyer}}</span>
+            <span class="price">{{item.id}}</span>
+            <span class="buyers">{{item.buyer}}</span>
           </div>
         </div>
-      <!-- </a> -->
       </router-link>
     </div>
   </div>  <!--pro-index end-->
