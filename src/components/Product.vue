@@ -100,7 +100,7 @@
     created: function () {
       //实例被创建完成后立即调用, 获取url参数中的id, 用来请求商品信息和评论
       this.id = this.$route.query.id
-      console.log(this.id )
+      // console.log(this.id )
     },
     methods: {
       // 加入购物车
@@ -114,28 +114,28 @@
           const mycart = JSON.parse(localStorage.getItem('mycart'))
           let addok = true
           for (let i=0; i< mycart.length; i++) {
+            // this.$store.state.mycart = mycart[i]
             if (mycart[i].pro.id == e.id) { // 如果缓存中商品ID 和 点击购买的商品ID相同, 则数量加1
               // mycart[i].num = mycart[i].num +1  //数量 +1              
               addok = false
               break;
             }
-            
-          }
-
+          }     
+          
           
           if(addok){  // 如果addok为真, 则添加商品到缓存
             mycart.push({'pro':e,'num':1})
           }
-          
-
-          that.cart = mycart
+         
+          that.mycart = mycart
           localStorage.setItem('mycart',JSON.stringify(mycart))
         } else {
           let mycart = [{'pro':e,'num':1}]
           that.cart = mycart
           localStorage.setItem('mycart',JSON.stringify(mycart))
+          // this.$store.state.mycart = JSON.stringify(mycart)  // 添加到全局变量
+          // console.log(this.$store.state.mycart)
         }
-        
       },     
       buyNow: function (e) {
         this.$router.push({path:'/OrderConfirm',query:{id:e.id,phone:e.phone}})  // 立即购买传参

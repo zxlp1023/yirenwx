@@ -47,7 +47,7 @@ $(function () {
     })
 
     //购物车加减数量
-    var MAX = 99,
+/*     var MAX = 99,
         MIN = 1;
     $('.weui-count__decrease').click(function (e) {
         var $input = $(e.currentTarget).parent().find('.weui-count__number');
@@ -60,7 +60,7 @@ $(function () {
         var number = parseInt($input.val() || "0") + 1
         if (number > MAX) number = MAX;
         $input.val(number)
-    })
+    }) */
 
     $('.delete-swipeout').click(function () {
         $(this).parents('.weui-cell').remove()

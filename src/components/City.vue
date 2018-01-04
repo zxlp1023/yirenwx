@@ -97,7 +97,6 @@
       <div class="city">
         <div class="city-list" v-for="(items,index) in getlist">
           <div class="city-letter" :id="(index)+1" v-text="index"></div>
-
           <!-- <router-link @click="gocity" v-for="item in items" :to="'/City/'+ item.id" :key='item.id'>{{item.name}} </router-link> -->
           <p @click="goindex({name:item.name,id:item.id})" v-for="item in items"  :key='item.id'>{{item.name}} </p>
         </div>

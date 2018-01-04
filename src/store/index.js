@@ -9,7 +9,8 @@ Vue.use(Vuex)
 const state = {
   nowcity: { name: '', id: '' },
   selectcity: {name: '', id: ''},
-  select: 'index'
+  select: 'index',
+  mycart: ''
 }
 
 export default new Vuex.Store({

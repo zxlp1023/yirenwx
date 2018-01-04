@@ -5,29 +5,31 @@
       <div class="title" v-text="title">亿人共享</div>
     </div>
     <div class="cart">
-      <mt-cell-swipe title="" :right="[{content: '删除',style: { background: '#f43b3e', color: '#fff' },
-          handler: () => this.$messagebox('删除成功') }]">
+      <mt-cell-swipe v-for="(item,index) in mycart" :key="item.pro.id" title="" :right="[{content: '删除',style: { background: '#f43b3e', color: '#fff' },
+          handler: () => deletePro(index) }]">
         <div class="weui-cell weui-cell_swiped">
           <div class="weui-cell__bd" style="transform: translate3d(0px, 0px, 0px);">
             <div class="weui-cell pl10">
               <div class="weui-cell__hd weui-cells_checkbox">
-                <label class=" weui-check__label" for="s1">
-                  <input type="checkbox" class="weui-check" name="checkbox1" id="s1" >
+                <label class=" weui-check__label" :for="item.pro.id" @click="ischecked(item.pro.id)">
+                  <input type="checkbox" class="weui-check " name="checkbox1" :id="item.pro.id"  checked>
                   <i class="weui-icon-checked"></i>
                 </label>
               </div>
               <div class="weui-cell__hd pic">
-                <a href="msg-product.html"><img src="../assets/img/up/2.png" alt="" ></a>
+                <!-- <a href="msg-product.html"><img src="../assets/img/up/2.png" alt="" ></a> -->
+                <img src="../assets/img/up/2.png" alt="" >
               </div>
               <div class="weui-cell__bd">
-                <div class="fz15"><a class="weui-cell_access" href="msg-product.html">超人全身水洗旋转麻将机</a></div>
+                <!-- <div class="fz15"><a class="weui-cell_access" href="msg-product.html">超人全身水洗旋转麻将机</a></div> -->
+                <div class="fz15"><div class="weui-cell_access" href="msg-product.html">超人全身水洗旋转麻将机</div></div>
                 <div class="hui94 fz13">香槟金</div>
                 <div class="priceControl">
-                  <span class="price fz15">35800</span>
+                  <span class="price fz15">{{item.pro.id}}</span>
                   <div class="weui-count">
-                    <a @click="minusNum"  class="weui-count__btn weui-count__decrease"></a>
-                    <input class="weui-count__number" type="number"  v-model="num">
-                    <a @click="addNum" class="weui-count__btn weui-count__increase"></a>
+                    <span @click="minusNum({id:item.pro.id})"  class="weui-count__btn weui-count__decrease"></span>
+                    <input class="weui-count__number" type="number"  v-model="item.num">
+                    <span @click="addNum({id:item.pro.id})" class="weui-count__btn weui-count__increase"></span>
                   </div>
                 </div>
               </div>
@@ -52,7 +54,7 @@
         </label>
         <div class="weui-cell weui-cell-r">
           <div class="weui-cell__bd ">
-            合计:<span class="price ">35800</span>
+            合计:<span class="price ">{{totalPrice}}</span>
           </div>
           <div class="weui-cell__hd">
             <router-link to="OrderConfirm" class="weui-btn weui-btn_warn btn-radius0">结算</router-link>
@@ -78,23 +80,75 @@
       
     },
     methods: {
-      totalPrice2: function () {
-        this.totalPrice = this.price * this.num
-      },
-      addNum: function () {
-        this.num = parseInt( this.num ) + 1
-        this.totalPrice2()
-      },
-      minusNum: function () {
-        if( this.num <=1 ){  // 数量不能小于1
-          return
+      addNum: function (e) {
+        // 从缓存中获取购物车信息,
+        // 循环输出信息
+        // 对比id是否相同, 给num+1
+        // 把结果mycart赋值给变量mycart
+        // 把结果mycart存到缓存
+        let that = this
+        let mycart = JSON.parse(localStorage.getItem('mycart')) // 获取缓存中的购物车信息
+        // console.log(mycart)
+        // 添加数量
+        for(let i =0; i < mycart.length; i++ ) {
+         if( mycart[i].pro.id == e.id ){
+           mycart[i].num += 1
+          //  console.log(mycart[i].num) 
+           break
+          }
         }
-        this.num = parseInt( this.num ) - 1
-        this.totalPrice2()
+        that.mycart = mycart
+        localStorage.setItem('mycart',JSON.stringify(mycart))
+        // console.log(e.id) 
+      },
+      minusNum: function (e) {
+        let that = this
+        let mycart = JSON.parse(localStorage.getItem('mycart')) // 获取缓存中的购物车信息
+        for(let i=0; i<mycart.length; i++){
+          if( mycart[i].pro.id == e.id ){
+            if(mycart[i].num <= 1){
+            break
+            }
+            mycart[i].num -= 1
+          }
+        }
+        that.mycart = mycart
+        localStorage.setItem('mycart',JSON.stringify(mycart))
+      },
+      deletePro: function(e){
+        // 删除商品   循环商品, 获取索引  删除指定锁定
+        let that = this
+        let mycart = JSON.parse(localStorage.getItem('mycart')) // 获取缓存中的购物车信息
+        for(let i=0; i<mycart.length; i++){
+          mycart.splice(e,1)
+          break
+        }
+        that.mycart = mycart
+        localStorage.setItem('mycart',JSON.stringify(mycart))
+      },
+      ischecked: function(e){
+        console.log(e.checked)
       }
     },
     mounted: function () {
+      this.mycart = JSON.parse(localStorage.getItem('mycart'))  // 首先把缓存的值赋值给mycart
+      // console.log(this.mycart)
+      // console.log( typeof(this.mycart))
       
+    },
+    computed: {
+      totalPrice: function () {
+        const mycart = this.mycart
+        let [singlePrice,allPrice] = [0,0]
+        // console.log(11111111111)
+        for(let i=0; i<mycart.length; i++){
+          singlePrice = mycart[i].num * mycart[i].pro.id
+          allPrice += singlePrice
+          // console.log( singlePrice )
+          // console.log( allPrice )
+        }
+        return allPrice
+      }
     }
   }
   
@@ -106,3 +160,4 @@
 .mint-cell-value{ flex: 1; color:inherit; }
 .weui-cell_swiped{ flex: 1; }
 </style>
+
