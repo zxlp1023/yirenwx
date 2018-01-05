@@ -113,13 +113,13 @@
         <div class="weui-tabbar__icon">
           <i class="iconfont icon-money"></i>
         </div>
-        <p class="weui-tabbar__label">金融</p>
+        <p class="weui-tabbar__label">小金库</p>
       </router-link>
       <router-link to="My" class="weui-tabbar__item">
         <div class="weui-tabbar__icon">
           <i class="iconfont icon-me"></i>
         </div>
-        <p class="weui-tabbar__label">我的</p>
+        <p class="weui-tabbar__label">我的中心</p>
       </router-link>
     </div> <!--footer end-->
   </div>

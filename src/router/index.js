@@ -22,6 +22,7 @@ import Logistics from '@/components/Logistics'
 import Cart from '@/components/Cart'
 import TopUp from '@/components/TopUp'
 import Withdraw from '@/components/Withdraw'
+import Test from '@/components/Test'
 
 Vue.use(Router)
 
@@ -38,6 +39,11 @@ export default new Router({
         path: '/Index',
         name: 'Index',
         component: Index
+      },
+      {
+        path: '/Test',
+        name: 'Test',
+        component: Test
       },
       {
         path: '/City',

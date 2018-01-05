@@ -11,8 +11,8 @@
           <div class="weui-cell__bd" style="transform: translate3d(0px, 0px, 0px);">
             <div class="weui-cell pl10">
               <div class="weui-cell__hd weui-cells_checkbox">
-                <label class=" weui-check__label" :for="item.pro.id" @click="ischecked(item.pro.id)">
-                  <input type="checkbox" class="weui-check " name="checkbox1" :id="item.pro.id"  checked>
+                <label class=" weui-check__label" :for="item.pro.id">
+                  <input type="checkbox" class="weui-check " v-model="ischecked"  @click="selectOne"   :id="item.pro.id"  >
                   <i class="weui-icon-checked"></i>
                 </label>
               </div>
@@ -46,9 +46,9 @@
     </div> <!-- /cart -->
     <div class="cartFoot">
       <div class="weui-cells weui-cells_checkbox fz15">
-        <label class="weui-cell weui-check__label " for="s11">
+        <label class="weui-cell weui-check__label " for="s11" >
           <div class="weui-cell__hd">
-            <input type="checkbox" class="weui-check" name="checkbox1" id="s11" >
+            <input type="checkbox" class="weui-check" name="checkbox1" id="s11" @click="selectAll" >
             <i class="weui-icon-checked"></i>全选
           </div>
         </label>
@@ -73,7 +73,10 @@
       return {
         title: '购物车',
         num: 1,
-        mycart: ''
+        mycart: '',
+        // selectArr: [],
+        ischecked: [],
+        mycart: JSON.parse(localStorage.getItem('mycart')) // 获取缓存中的购物车信息
       }
     },
     created: function () {
@@ -126,9 +129,33 @@
         that.mycart = mycart
         localStorage.setItem('mycart',JSON.stringify(mycart))
       },
-      ischecked: function(e){
-        console.log(e.checked)
+      selectOne: function (e) {
+        if(e.currentTarget.checked){
+          // this.ischecked = true
+        }else{
+          // this.ischecked = false
+        }
+        console.log(this.ischecked)
+      },
+      selectAll: function(e){
+        
+        // this.$refs.checkedTrue.id='111' 
+        
+        // console.log( this.$refs.checkedTrue )
+        // this.mycart.forEach(item =>{
+        //   this.$refs.checkedTrue.checked='checked'
+        //   // console.log(this.$refs.checkedTrue.checked=true)
+        //   // console.log(item)
+        // })
+        if(e.currentTarget.checked){
+          // this.ischecked = true
+          
+        }else{
+          // this.ischecked = false
+    
+        }
       }
+      
     },
     mounted: function () {
       this.mycart = JSON.parse(localStorage.getItem('mycart'))  // 首先把缓存的值赋值给mycart
@@ -151,7 +178,8 @@
       }
     }
   }
-  
+
+
 </script>
 <style>
 .mint-cell-title{ display: none}
@@ -160,4 +188,3 @@
 .mint-cell-value{ flex: 1; color:inherit; }
 .weui-cell_swiped{ flex: 1; }
 </style>
-

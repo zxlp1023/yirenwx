@@ -107,7 +107,7 @@
         <div class="weui-tabbar__icon">
           <i class="iconfont icon-me"></i>
         </div>
-        <p class="weui-tabbar__label">我的</p>
+        <p class="weui-tabbar__label">我的中心</p>
       </router-link>
     </div> <!--footer end-->
 
