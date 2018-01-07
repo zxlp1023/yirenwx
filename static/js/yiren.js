@@ -72,7 +72,7 @@ $(function () {
 
     // 领取红包
     function GetRTime() {
-        var EndTime = new Date('2017/12/20 00:00:00');
+        var EndTime = new Date('2018/1/6 23:44:00');
         var NowTime = new Date();
         var t = EndTime.getTime() - NowTime.getTime();
         var d = 0;
@@ -92,7 +92,7 @@ $(function () {
         document.getElementById("t_m").innerHTML = m + " :";
         document.getElementById("t_s").innerHTML = s + "";
     }
-    // setInterval(GetRTime, 0); 关闭倒计时
+    // setInterval(GetRTime, 1000); //关闭倒计时
 
     // 红包
     $('.redPacket').click(function () {

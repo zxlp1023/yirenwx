@@ -12,7 +12,7 @@
             <div class="weui-cell pl10">
               <div class="weui-cell__hd weui-cells_checkbox">
                 <label class=" weui-check__label" :for="item.pro.id">
-                  <input type="checkbox" class="weui-check " v-model="ischecked"  @click="selectOne"   :id="item.pro.id"  >
+                  <input type="checkbox" class="weui-check " v-model="selectArr[index]"    :id="item.pro.id" >
                   <i class="weui-icon-checked"></i>
                 </label>
               </div>
@@ -48,7 +48,7 @@
       <div class="weui-cells weui-cells_checkbox fz15">
         <label class="weui-cell weui-check__label " for="s11" >
           <div class="weui-cell__hd">
-            <input type="checkbox" class="weui-check" name="checkbox1" id="s11" @click="selectAll" >
+            <input type="checkbox" class="weui-check" name="checkbox1" id="s11" @click="selectAll" v-model="isChecked">
             <i class="weui-icon-checked"></i>全选
           </div>
         </label>
@@ -57,7 +57,8 @@
             合计:<span class="price ">{{totalPrice}}</span>
           </div>
           <div class="weui-cell__hd">
-            <router-link to="OrderConfirm" class="weui-btn weui-btn_warn btn-radius0">结算</router-link>
+            <!-- <a class="weui-btn weui-btn_warn btn-radius0" @click="submit">结算</a> -->
+            <router-link to="OrderConfirm" class="weui-btn weui-btn_warn btn-radius0" @click="submit">结算</router-link>
           </div>
         </div>
       </div>
@@ -74,8 +75,9 @@
         title: '购物车',
         num: 1,
         mycart: '',
-        // selectArr: [],
-        ischecked: [],
+        selectArr: [],
+        // selectArr: [true,false],
+        isChecked: true,
         mycart: JSON.parse(localStorage.getItem('mycart')) // 获取缓存中的购物车信息
       }
     },
@@ -129,52 +131,95 @@
         that.mycart = mycart
         localStorage.setItem('mycart',JSON.stringify(mycart))
       },
-      selectOne: function (e) {
-        if(e.currentTarget.checked){
-          // this.ischecked = true
-        }else{
-          // this.ischecked = false
-        }
-        console.log(this.ischecked)
-      },
       selectAll: function(e){
-        
-        // this.$refs.checkedTrue.id='111' 
-        
-        // console.log( this.$refs.checkedTrue )
-        // this.mycart.forEach(item =>{
-        //   this.$refs.checkedTrue.checked='checked'
-        //   // console.log(this.$refs.checkedTrue.checked=true)
-        //   // console.log(item)
-        // })
-        if(e.currentTarget.checked){
-          // this.ischecked = true
+
+       /*  for(let i=0; i< this.selectArr.length; i++){
+            
+             if(e.currentTarget.checked){ 
+               this.selectArr[i] = true 
+               console.log(this.selectArr[i])
+               }
+             else{
+               this.selectArr[i] = false
+                console.log(this.selectArr[i])
+             }
+          } */
+          let selectArr = []
+
+          if(e.currentTarget.checked){
+            for(let i=0; i< this.selectArr.length; i++){
+              selectArr[i] = true
+           }
+              this.selectArr = selectArr
+            }else{
+              for(let i=0; i< this.selectArr.length; i++){
+              selectArr[i] = false
+           }
+              this.selectArr = selectArr
+          }
+
           
-        }else{
-          // this.ischecked = false
-    
-        }
+          console.log(selectArr)
+
+          
+        // if(e.currentTarget.checked){
+        //   /* this.selectArr.forEach( index => {
+        //     index = true
+        //   }) */
+        //   for(let i=0; i< this.selectArr.length; i++){
+        //     this.selectArr[i] = true
+        //     console.log( this.selectArr[i] )
+        //   }
+        //   // console.log(this.selectArr)
+          
+        // }else{
+        //   // this.ischecked = false
+        //   this.selectArr = true
+        // }
+      },
+      submit: function (){
+       
       }
-      
     },
     mounted: function () {
       this.mycart = JSON.parse(localStorage.getItem('mycart'))  // 首先把缓存的值赋值给mycart
       // console.log(this.mycart)
       // console.log( typeof(this.mycart))
+
+      // 设置checkbox 的默认值为 true  遍历所有元素,然后把所有selectArr 的子元素设置为true,就默认选中了
+      for ( var i=0; i<this.mycart.length; i++){
+        this.selectArr[i] = true
+        // console.log(this.selectArr)
+      }
+
       
+      
+    
     },
     computed: {
       totalPrice: function () {
-        const mycart = this.mycart
         let [singlePrice,allPrice] = [0,0]
-        // console.log(11111111111)
-        for(let i=0; i<mycart.length; i++){
-          singlePrice = mycart[i].num * mycart[i].pro.id
-          allPrice += singlePrice
+  
+        for(let i=0; i<this.mycart.length; i++){
+          if(this.selectArr[i]){
+            singlePrice = this.mycart[i].num * this.mycart[i].pro.id
+            allPrice += singlePrice
+          }
           // console.log( singlePrice )
           // console.log( allPrice )
         }
+
+      // 判断当某个元素没选中时, 全选状态的改变
+       if(this.selectArr.filter( item => !item ).length==0){
+          this.isChecked = true
+        }else{
+          this.isChecked = false
+        }
+
+        //返回总价
         return allPrice
+
+
       }
     }
   }
