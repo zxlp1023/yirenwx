@@ -107,7 +107,7 @@
         <div class="weui-tabbar__icon">
           <i class="iconfont icon-message"></i>
         </div>
-        <p class="weui-tabbar__label">电话</p>
+        <p class="weui-tabbar__label">会员对讲</p>
       </router-link>
       <router-link to="Financial" class="weui-tabbar__item">
         <div class="weui-tabbar__icon">

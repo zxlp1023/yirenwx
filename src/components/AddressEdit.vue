@@ -12,23 +12,25 @@
             <label class="weui-label">联系人</label>
           </div>
           <div class="weui-cell__bd">
-            <input class="weui-input" type="text" placeholder="您的姓名" autofocus>
+            <input class="weui-input" type="text" placeholder="您的姓名" :value="name" autofocus>
           </div>
         </div>
         <div class="weui-cell weui-cells_radio mt0">
           <div class="weui-cell__hd">
             <label class="weui-label"></label>
           </div>
-          <label class="weui-check__label" for="x11">
+          <label class="weui-check__label">
             <div class="weui-cell__ft">
-              <input type="radio" name="radio1" class="weui-check" id="x11" checked="checked">
+              <input type="radio" name="radio1" class="weui-check" v-if="sex == 1"  checked >
+              <input type="radio" name="radio1" class="weui-check" v-else >
               <span class="weui-icon-checked"></span>
             </div>
             先生
           </label>
-          <label class="weui-check__label" for="x12">
+          <label class="weui-check__label" >
             <div class="weui-cell__ft">
-              <input type="radio" class="weui-check" name="radio1" id="x12">
+              <input type="radio" class="weui-check" name="radio1"  v-if="sex == 0" checked >
+              <input type="radio" class="weui-check" name="radio1"  v-else>
               <span class="weui-icon-checked"></span>
             </div>
             女士
@@ -39,7 +41,7 @@
             <label class="weui-label">联系电话</label>
           </div>
           <div class="weui-cell__bd">
-            <input class="weui-input" type="tel" placeholder="您的手机号码">
+            <input class="weui-input" type="tel" placeholder="您的手机号码" :value="tel">
           </div>
         </div>
       </div>
@@ -50,7 +52,7 @@
             <label class="weui-label w6r">小区/大厦/学校</label>
           </div>
           <div class="weui-cell__bd">
-            <input class="weui-input bGlocation3" placeholder="详细地址">
+            <input class="weui-input bGlocation3" placeholder="详细地址" :value="addr">
           </div>
         </div>
         <div class="weui-cell">
@@ -73,8 +75,30 @@
     name: 'AddressAdd',
     data () {
       return {
-        title: '添加地址'
+        title: '添加地址',
+        id: this.$route.query.id,
+        name: this.$route.query.name,
+        tel: this.$route.query.tel,
+        addr: this.$route.query.addr,
+        addr2: this.$route.query.addr2,
+        sex: ''
       }
+    },
+    created: function () {
+      // this.id = 
+    },
+    methods: {
+      saveAddr: function () {
+        
+      }
+    },
+    mounted: function () {
+     /*  alert(
+        this.sex
+      ) */
+      this.sex = this.$route.query.sex
+    },
+    computed: {
     }
   }
 </script>

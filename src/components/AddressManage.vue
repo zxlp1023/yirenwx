@@ -6,34 +6,31 @@
       <router-link to="AddressAdd" class="right"> 添加 </router-link>
     </div>
     <div class="addr-manage ">
-      <dl>
+      <dl v-for="(item,index)  in address">
           <dd>
-            <span>峨眉山群侠</span>
-            <span class="fr">13908128888</span>
+            <span>{{item.name}}</span>
+            <span class="fr">{{item.tel}}</span>
           </dd>
-          <dd>成都市锦江区滨江花园2栋1单元</dd>
-          <dt>
-            <span class="default"><i class="weui-icon-circle weui-icon-success"></i>默认地址</span>
+          <dd>{{item.addr}}</dd>
+          <dt v-if="item.isDefault">
+            <span class="default" @click="selectDefault(item.id)"><i class="weui-icon-circle" :class="{ 'weui-icon-success': item.isDefault }"></i>默认地址</span>
             <p>
-              <a href="address-change.html"> <i class="iconfont icon-edit"></i>编辑</a>
+              <!-- <a href="address-change.html"> <i class="iconfont icon-edit"></i>编辑</a> -->
+              <router-link :to="{path:'/AddressEdit', query: item}">编辑</router-link>
               <a class="delete"> <i class="iconfont icon-trash3"></i>删除</a>
             </p>
           </dt>
-      </dl>
-      <dl>
-          <dd>
-            <span>峨眉山群侠</span>
-            <span class="fr">13908128888</span>
-          </dd>
-          <dd>成都市锦江区滨江花园2栋1单元</dd>
-          <dt>
-            <span class="default"><i class="weui-icon-circle"></i>设为默认地址</span>
+          <dt v-else="!item.isDefault">
+            <span class="default" @click="selectDefault(item.id)"><i class="weui-icon-circle" :class="{ 'weui-icon-success': item.isDefault }"></i>设为默认地址</span>
             <p>
-              <a href="address-change.html"> <i class="iconfont icon-edit"></i>编辑</a>
-              <a class="delete"><i class="iconfont icon-trash3"></i>删除</a>
+              <!-- <a href="address-change.html"> <i class="iconfont icon-edit"></i>编辑</a> -->
+              <router-link :to="{path:'/AddressEdit', query: item}">编辑</router-link>
+              <a class="delete"> <i class="iconfont icon-trash3"></i>删除</a>
             </p>
           </dt>
+
       </dl>
+     
     </div>
   </div>
 </template>
@@ -42,8 +39,28 @@
     name: 'AddressManage',
     data () {
       return {
-        title: '收货地址'
+        title: '收货地址',
+        address: [{name:'猫十三',tel:'13566668888',addr:'四川省成都市锦江区 滨江花园3栋 1单元',isDefault:1,id:1,sex:0},{name:'猫十一',tel:'13355667788',addr:'四川省成都市锦江区 滨江花园3栋 1单元',isDefault:0,id:2,sex:1}]
       }
+    },
+    methods: {
+      // 选择默认地址
+      selectDefault: function (e) {
+        for(let i=0; i<this.address.length; i++){
+          if (this.address[i].id == e) {
+            
+           this.address[i].isDefault = 1
+          //  console.log(e )
+          }else{
+            this.address[i].isDefault = 0
+
+          }
+        }
+      }
+    },
+    mounted: function(){
+
+      
     }
   }
 </script>

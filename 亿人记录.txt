@@ -1,3 +1,5 @@
+接口地址  http://172.16.1.58:8080/swagger-ui.html
+
 vue cli 构建项目
 引入mintui
 mian.js 载入mintui
@@ -46,4 +48,19 @@ mounted   生命周期,组件创建方法后执行的函数
 // 购物车修改
 1.从缓存获取购物车信息, 赋值给变量
 2. 点击加号的时候, 缓存num + 1
+
+
+
+// 接口
+先登录
+openId 123
+wxImg 122
+wxNickName 115
+
+登录成功后获取 access_token
+
+
+调用其他接口都必须填写 access_token
+
+
 

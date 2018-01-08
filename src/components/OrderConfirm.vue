@@ -17,12 +17,12 @@
   
           </div>
   
-          <div class="weui-cell__bd fz14 p075">
-  
+          <div class="weui-cell__bd fz14 p075" v-if="defaultAddr">
             <p>收货人：<span class="pl10">猫十一</span><span class="pl10 fz15">18046721351</span></p>
-  
             <p class="hui72">收货地址：四川省成都市锦江区 滨江花园3栋 1单元</p>
-  
+          </div>
+          <div class="weui-cell__bd fz14 p075" v-else>
+            请填写收货地址
           </div>
   
           <div class="weui-cell__ft"></div>
@@ -118,7 +118,9 @@
         title: '确认订单',
         num: 1,
         price: 20,
-        totalPrice: ''
+        totalPrice: '',
+        defaultAddr: [{name:'猫十一',tel:'13566668888',addr:'四川省成都市锦江区 滨江花园3栋 1单元'}],
+        
         // pros:[{num:1,name:'a1'}]
       }
     },
@@ -141,7 +143,7 @@
         }
         this.num = parseInt( this.num ) - 1
         this.totalPrice2()
-      }
+      }      
       
     },
     mounted: function () {

@@ -18,6 +18,7 @@ import Wallet from '@/components/Wallet'
 import Invite from '@/components/Invite'
 import AddressManage from '@/components/AddressManage'
 import AddressAdd from '@/components/AddressAdd'
+import AddressEdit from '@/components/AddressEdit'
 import Logistics from '@/components/Logistics'
 import Cart from '@/components/Cart'
 import TopUp from '@/components/TopUp'
@@ -27,6 +28,7 @@ import Test from '@/components/Test'
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',  // 关闭vue router地址中默认的#
   routes: [{
     path: '/',
     component: App,
@@ -129,6 +131,11 @@ export default new Router({
         path: '/AddressAdd',
         name: 'AddressAdd',
         component: AddressAdd
+      },
+      {
+        path: '/AddressEdit',
+        name: 'AddressEdit',
+        component: AddressEdit
       },
       {
         path: '/Logistics',

@@ -10,7 +10,7 @@
   <banner></banner>
   <div class="weui-panel pro-index">
     <div class="weui-panel__bd">        
-      <router-link  v-for="item in pros" :key="item.id"  :to="{path:'/Product', query: {id: item.id}}" class="weui-media-box weui-media-box_appmsg" >      
+      <router-link :to="{path:'/Product', query: {id: item.id}}" v-for="item in pros" :key="item.id"   class="weui-media-box weui-media-box_appmsg" >      
       <!-- <router-link to="{path:'/Product', query: {id: item.id}}" class="weui-media-box weui-media-box_appmsg" v-for="item in pros" :key="item.id" >       -->
         <div class="weui-media-box__hd">
           <img class="weui-media-box__thumb" :src="imgshopUrl + item.image_path" alt="">

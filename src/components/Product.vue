@@ -129,7 +129,7 @@
          
           that.mycart = mycart
           localStorage.setItem('mycart',JSON.stringify(mycart))
-        } else {
+        } else { 
           let mycart = [{'pro':e,'num':1}]
           that.cart = mycart
           localStorage.setItem('mycart',JSON.stringify(mycart))
