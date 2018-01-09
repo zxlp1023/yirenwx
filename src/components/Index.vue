@@ -69,6 +69,7 @@ export default {
     return {
       title: '亿人共享',
       pros: [],
+      login: '',
       imgshopUrl: 'http://cangdu.org:8001/img/'
 /*       pros: [
         {
@@ -103,6 +104,19 @@ export default {
     .catch( error => {
       console.log(error);
     });
+
+    axios({
+      method:'get',
+      url:'http://211.149.219.18:8818/user/login?openId=111',
+      dataType:'JSONP',
+      data:{'ACCESS_TOKEN':'eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE1MTU0ODk3OTIsInN1YiI6IntcInVzZXJJZFwiOjksXCJsb2dpblRpbWVcIjoxNTE1NDg5NzkyNTMxfSJ9.xX-7eDe8hAGtGo-xGF8Y_c4_IRwdgqiIWK65V2pRkfQ','Accept': 'application/json'}
+    })
+    .then( res => {
+      this.login = res.data
+    })
+    .catch( error =>  {
+      console.log( error)
+    })
     
   },
   components: { Search, Banner, Foot }
