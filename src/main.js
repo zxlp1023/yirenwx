@@ -23,8 +23,18 @@ import router from './router'
 import store from './store/index'
 
 // 引入resource
-import Resource from 'vue-resource'
-Vue.use(Resource)
+// import Resource from 'vue-resource'
+// Vue.use(Resource)
+
+// 引入 axios
+import axios from 'axios'
+// Vue.prototype.axios = axios //组件调用this.axios.get(...)
+// Vue.prototype.$ajax = axios  //换个名字 组件调用this.$ajax.get(...)
+window.axios = axios  // 组件中调用 axios.get(...)
+
+// axios.defaults.baseURL = 'http://211.149.219.18:8818/'
+// axios.defaults.headers.common['Authorization'] = AUTH_TOKEN
+// axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 
 Vue.use(MintUI)
 Vue.config.productionTip = false

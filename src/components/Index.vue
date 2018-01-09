@@ -95,12 +95,13 @@ export default {
     }
   },
   mounted: function () {
-    this.$http.get('http://cangdu.org:8001/shopping/restaurants?latitude=31.22967&longitude=121.4762').then(response => {
-      console.log(response);
-      this.pros=response.body;
-    }, response => {
-      console.log(response);
-      console.log(this.pros);
+    axios.get('/api/shopping/restaurants?latitude=31.22967&longitude=121.4762')
+    .then(res => {
+      // console.log(res.data);
+      this.pros=res.data
+    })
+    .catch( error => {
+      console.log(error);
     });
     
   },

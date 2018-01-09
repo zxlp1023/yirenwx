@@ -94,7 +94,8 @@
         grade2: '5.0',
         score: '',
         starscore: 'star-',
-        mycart : ''
+        mycart : '',
+        shopNow: ''
       }
     },
     created: function () {
@@ -138,7 +139,32 @@
         }
       },     
       buyNow: function (e) {
-        this.$router.push({path:'/OrderConfirm',query:{id:e.id,phone:e.phone}})  // 立即购买传参
+        //立即购买, 把商品信息存到shopNow , 然后存到缓存
+        this.$router.push({path:'/OrderConfirm',query:{shopNow:1}})  // 立即购买传参
+        let shopNow = [{'pro':e,'num':1}] 
+        this.shopNow = shopNow
+        localStorage.setItem('shopNow',JSON.stringify(shopNow))
+
+       /*  if (localStorage.getItem('shopNow')) {
+          const shopNow = JSON.parse(localStorage.getItem('shopNow'))
+          let addok = true
+          for (let i=0; i< mycart.length; i++) {
+            // this.$store.state.mycart = mycart[i]
+            if (mycart[i].pro.id == e.id) { // 如果缓存中商品ID 和 点击购买的商品ID相同, 则数量加1
+              // mycart[i].num = mycart[i].num +1  //数量 +1              
+              addok = false
+              break;
+            }
+          }     
+          
+         
+          that.mycart = mycart
+          localStorage.setItem('mycart',JSON.stringify(mycart))
+        } else { 
+          let mycart = [{'pro':e,'num':1}]
+          that.cart = mycart
+          localStorage.setItem('mycart',JSON.stringify(mycart))
+        } */
       }, 
       // 处理评分
       grade: function ( fen ) {

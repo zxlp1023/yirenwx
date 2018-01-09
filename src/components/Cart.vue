@@ -78,7 +78,7 @@
         selectArr: [],
         // selectArr: [true,false],
         isChecked: true,
-        mycart: JSON.parse(localStorage.getItem('mycart')) // 获取缓存中的购物车信息
+        mycart: '' // 获取缓存中的购物车信息
       }
     },
     created: function () {
@@ -199,7 +199,6 @@
     computed: {
       totalPrice: function () {
         let [singlePrice,allPrice] = [0,0]
-  
         for(let i=0; i<this.mycart.length; i++){
           if(this.selectArr[i]){
             singlePrice = this.mycart[i].num * this.mycart[i].pro.id

@@ -130,14 +130,14 @@
     })  
  */
     //热门城市
-    this.$http.get('http://cangdu.org:8001/v1/cities?type=hot').then( response => {
+    axios.get('/api/v1/cities?type=hot').then( response => {
       // console.log(response)
-      this.hotcity = response.body
+      this.hotcity = response.data
     })     
 
     // 所有城市
-    this.$http.get('http://cangdu.org:8001/v1/cities?type=group').then(response => {
-      this.citylist = response.body
+    axios.get('/api/v1/cities?type=group').then(response => {
+      this.citylist = response.data
       
     }), response => {
       // console.log(response)

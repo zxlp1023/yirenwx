@@ -64,3 +64,32 @@ wxNickName 115
 
 
 
+// 使用axios
+首先安装axios
+
+然后再main.js中引用
+/ 引入 axios
+import axios from 'axios'
+// Vue.prototype.axios = axios 
+//组件调用this.axios.get(...)
+// Vue.prototype.$ajax = axios  
+//换个名字 组件调用this.$ajax.get(...)
+window.axios = axios  
+// 组件中调用 axios.get(...)
+
+然后在config/index.js中配置
+ proxyTable: {
+      '/api': {
+        target: 'http://cangdu.org:8001/',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': ''
+        }
+      }
+    },
+
+调用的时候 "http://cangdu.org:8001/shopping/restaurants?latitude=31.22967&longitude=121.4762".
+改为   api/shopping/restaurants?latitude=31.22967&longitude=121.4762
+api代表之前设置的地址
+
+最后重启项目  npm run dev

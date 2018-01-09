@@ -74,8 +74,7 @@ export default {
   },
   methods: {
     searchPros: function () {
-      this.$http
-        .get(
+        axios.get(
           "http://cangdu.org:8001/v1/pois?city_id=" +
             this.$store.state.nowcity.id +
             "&keyword=" +
@@ -85,7 +84,7 @@ export default {
         .then(response => {
           console.log(response);
           // console.log(this.$store.state.nowcity)
-          this.list = response.body;
+          this.list = response.data;
 
           // 如果没有搜到内容
           if (response.body == "") {
@@ -120,8 +119,8 @@ export default {
   mounted: function() {
 
     // 获取定位
-    this.$http.get("http://cangdu.org:8001/v1/cities?type=guess").then(response => {
-        this.$store.state.nowcity = response.body;
+    axios.get("/api/v1/cities?type=guess").then(response => {
+        this.$store.state.nowcity = response.data;
       });
 
     //检查默认有没有本地缓存
