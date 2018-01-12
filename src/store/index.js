@@ -7,11 +7,12 @@ import mutations from './mutations'
 Vue.use(Vuex)
 
 const state = {
-  nowcity: { name: '', id: '' },
-  selectcity: {name: '', id: ''},
+  nowcity: { name: '', id: '' },  // 当前定位城市
+  selectcity: {name: '', id: ''},  // 重新选择的城市
   select: 'index',
-  mycart: '',
-  token: 'eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE1MTU0ODk3OTIsInN1YiI6IntcInVzZXJJZFwiOjksXCJsb2dpblRpbWVcIjoxNTE1NDg5NzkyNTMxfSJ9.xX-7eDe8hAGtGo-xGF8Y_c4_IRwdgqiIWK65V2pRkfQ'
+  imgUrl: 'http://youmehe.oss-cn-beijing.aliyuncs.com/image/'
+  // mycart: '',
+
 }
 
 export default new Vuex.Store({

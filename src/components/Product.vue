@@ -21,14 +21,14 @@
 
   <div class="proIntro col">
     <!-- <div class="fz15b">日式和风手绘陶瓷餐具</div> -->
-    <div class="fz15b">{{promsg.name}}</div>
-    <span class="price">84.5</span>
-    <span class="price2">98.5</span>
+    <div class="fz15b">{{promsg.goodsName}}</div>
+    <span class="price">{{promsg.price}}</span>
+    <span class="price2">{{promsg.oldPrice}}</span>
   </div>
   <div class="shopService  mt10">
-    <span><i class="weui-icon-success"></i>安全保证</span>
-    <span><i class="weui-icon-success"></i>十天无理由退货</span>
-    <span><i class="weui-icon-success"></i>平台推荐</span>
+    <!-- <span v-for="item in labels" :key="item.id"><i class="weui-icon-success"></i>item.labelName</span> -->
+    <!-- <span v-for="item in labels" :key="item.id"><i class="weui-icon-success"></i>item.labelName</span> -->
+    <span v-for="item in labels"><i class="weui-icon-success"></i>{{item.labelName}}</span>
   </div>
 
   <div class="weui-panel  commentsPro">
@@ -70,10 +70,8 @@
       </a> -->
     </div>
   </div> <!-- /commentsPro -->
-  <div class="proDetails mt10">
-    这里是详情介绍
-    <img src="../assets/img/up/banner.jpg" alt="图片详情介绍">
-     图片详情介绍
+  <div class="proDetails mt10" v-html="content">
+    <!-- {{}} -->
   </div>
   <div class="proFoot">
     <a @click="addcart({id:promsg.id,phone:promsg.phone})" href="javascript:;" id="show-toast"  class="weui-btn weui-btn_primary">加入购物车</a>
@@ -87,7 +85,7 @@
     name: 'Prodoct',
     data () {
       return {
-        id:'',
+        id:this.$route.query.id,
         title: '商品详情',
         promsg: '',
         grade1: '3.5',
@@ -95,15 +93,32 @@
         score: '',
         starscore: 'star-',
         mycart : '',
-        shopNow: ''
+        shopNow: '',
+        token: localStorage.getItem('token'),
+        imgUrl: this.$store.state.imgUrl,
+        labels: '',
+        content:''
       }
     },
     created: function () {
       //实例被创建完成后立即调用, 获取url参数中的id, 用来请求商品信息和评论
-      this.id = this.$route.query.id
-      // console.log(this.id )
+          // this.id = this.$route.query.id
+        axios({
+          method:'get',
+          url:'api/goods/getContent?id=' + this.id,
+          headers: {'ACCESS_TOKEN': this.token}
+          })
+          .then( res => {
+            this.promsg = res.data.data
+            this.labels = res.data.data.labels
+            this.content = res.data.data.content
+            // console.log(this.labels)
+          }).catch( error => {
+            console.log(error)
+          })
     },
     methods: {
+      
       // 加入购物车
       addcart: function (e) {
         const that = this
@@ -194,27 +209,18 @@
       
     },
     mounted: function () {
-      
+      // console.log(this.id )
       this.grade(this.grade2)  // 通过函数处理分数返回正确的分数
 
       // 商品信息
-      this.$http.get('http://cangdu.org:8001/shopping/restaurant/' + this.id).then( response =>{
-        // console.log(response);
-        this.promsg = response.body;
-      }, response => {
-        // console.log(response)
-      })
 
       // 评价展示
-      this.$http.get('http://cangdu.org:8001/ugc/v2/restaurants/'+ this.id +'/ratings?offset=0&limit=2').then(response => {
-        console.log(response)
+      axios.get('http://cangdu.org:8001/ugc/v2/restaurants/'+ this.id +'/ratings?offset=0&limit=2').then(response => {
+        // console.log(response)
         this.commentsTwo = response.body
       }, response => {
-        console.log(response)
-      })
-      // console.log( this.grade(this.grade2)    
-      
-      
+        // console.log(response)
+      })      
 
     }
     

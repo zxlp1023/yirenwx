@@ -8,28 +8,7 @@
       <search></search>
   </div> <!--/header-->
   <banner></banner>
-  <div class="weui-panel pro-index">
-    <div class="weui-panel__bd">        
-      <router-link :to="{path:'/Product', query: {id: item.id}}" v-for="item in pros" :key="item.id"   class="weui-media-box weui-media-box_appmsg" >      
-      <!-- <router-link to="{path:'/Product', query: {id: item.id}}" class="weui-media-box weui-media-box_appmsg" v-for="item in pros" :key="item.id" >       -->
-        <div class="weui-media-box__hd">
-          <img class="weui-media-box__thumb" :src="imgshopUrl + item.image_path" alt="">
-        </div>
-        <div class="weui-media-box__bd">
-          <h4 class="weui-media-box__title">{{ item.title }}</h4>
-          <p class="weui-media-box__desc">{{item.subTitle}}</p>
-          <div class="item-star">
-            <span class="star star-50"></span>
-            <span>{{item.start}}</span>
-          </div>
-          <div class="item-price">
-            <span class="price">{{item.id}}</span>
-            <span class="buyers">{{item.buyer}}</span>
-          </div>
-        </div>
-      </router-link>
-    </div>
-  </div>  <!--pro-index end-->
+  <product-list></product-list>
   <div class="weui-tabbar">
       <router-link to="/" class="weui-tabbar__item  weui-bar__item--on">
         <div class="weui-tabbar__icon">
@@ -62,65 +41,53 @@
 <script>
 import Search from '@/components/Search'
 import Banner from '@/components/Banner'
-import Foot from '@/components/Foot'
+import ProductList from '@/components/ProductList'
 export default {
   name: 'Index',
   data () {
     return {
       title: '亿人共享',
-      pros: [],
-      login: '',
-      imgshopUrl: 'http://cangdu.org:8001/img/'
-/*       pros: [
-        {
-          id: 1,
-          img: '../../src/assets/img/up/2.jpg',
-          title: 'NEW新款上新',
-          subTitle: '年度新款等您来抢2',
-          start: '4.8',
-          price: '111.00',
-          buyer: '2311',
-          url: 'url'
-        },
-        {
-          id: 2,
-          img: '../../src/assets/img/up/2.jpg',
-          title: 'NEW新款上新',
-          subTitle: '年度新款等您来抢1',
-          start: '4.8',
-          price: '1919.00',
-          buyer: '123',
-          url: 'url'
-        }
-      ] */
     }
   },
   mounted: function () {
-    axios.get('/api/shopping/restaurants?latitude=31.22967&longitude=121.4762')
-    .then(res => {
-      // console.log(res.data);
-      this.pros=res.data
-    })
-    .catch( error => {
-      console.log(error);
-    });
-
-    axios({
-      method:'get',
-      url:'http://211.149.219.18:8818/user/login?openId=111',
-      dataType:'JSONP',
-      data:{'ACCESS_TOKEN':'eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE1MTU0ODk3OTIsInN1YiI6IntcInVzZXJJZFwiOjksXCJsb2dpblRpbWVcIjoxNTE1NDg5NzkyNTMxfSJ9.xX-7eDe8hAGtGo-xGF8Y_c4_IRwdgqiIWK65V2pRkfQ','Accept': 'application/json'}
-    })
+    // axios.get('http://cangdu.org:8001/shopping/restaurants?latitude=31.22967&longitude=121.4762')
+    // .then(res => {
+    //   console.log(res);
+    //   // this.pros=res.data
+    // })
+    // .catch( error => { 
+    //   console.log(error);
+    // });
+    axios.post('api/user/login?openId=111')  //请求登陆
     .then( res => {
-      this.login = res.data
+      // console.log(res)
+      if (res.data.code < 2000) { // code小于2000登陆成功, 寸id和token到全局变量
+        // this.userInfo = {id:res.data.data.access_id,token:res.data.data.access_token}
+        // localStorage.setItem('userid') = res.data.data.access_id
+        this.uid = res.data.data.access_id
+        this.token = res.data.data.access_token
+        localStorage.setItem('uid',this.uid) 
+        // localStorage.setItem('uid',JSON.stringify(this.uid)) 
+        localStorage.setItem('token',this.token) 
+        // console.log(this.uid) 
+      }
     })
     .catch( error =>  {
       console.log( error)
     })
-    
+      
   },
-  components: { Search, Banner, Foot }
+  components: { Search, Banner,ProductList }
 }
+
+/* 
+    "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE1MTU1NjcwODEsInN1YiI6IntcInVzZXJJZFwiOjksXCJsb2dpblRpbWVcIjoxNTE1NTY3MDgwOTkxfSJ9.R2FO0srt_te4HrIQkHrjSsJyvS1lHCLtxNothKoEJAU"
+
+        "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE1MTU1NjcwODEsInN1YiI6IntcInVzZXJJZFwiOjksXCJsb2dpblRpbWVcIjoxNTE1NTY3MDgwOTkxfSJ9.R2FO0srt_te4HrIQkHrjSsJyvS1lHCLtxNothKoEJAU"
+
+
+
+*/
 </script>
 
 

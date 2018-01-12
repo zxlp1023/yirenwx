@@ -58,7 +58,7 @@ export default new Router({
         component: Index
       },
       {
-        path: '/Product',
+        path: '/getContent',
         name: 'Product',
         component: Product
       },
