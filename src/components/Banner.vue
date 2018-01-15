@@ -25,6 +25,7 @@
       // axios.get('api/banner/list',{params:{token:this.token}})
       axios({
        method:'get',
+      //  url:'api/banner/list',
        url:'api/banner/list',
        headers: {'ACCESS_TOKEN': this.token}
       })

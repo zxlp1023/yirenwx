@@ -14,6 +14,7 @@ module.exports = {
       '/api': {
         // target: 'http://cangdu.org:8001/',
         target: 'http://211.149.219.18:8818/',
+        // target: 'http://172.16.1.58:8818/',
         changeOrigin: true,
         pathRewrite: {
           '^/api': ''

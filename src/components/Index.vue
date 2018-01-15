@@ -50,14 +50,6 @@ export default {
     }
   },
   mounted: function () {
-    // axios.get('http://cangdu.org:8001/shopping/restaurants?latitude=31.22967&longitude=121.4762')
-    // .then(res => {
-    //   console.log(res);
-    //   // this.pros=res.data
-    // })
-    // .catch( error => { 
-    //   console.log(error);
-    // });
     axios.post('api/user/login?openId=111')  //请求登陆
     .then( res => {
       // console.log(res)
@@ -84,8 +76,6 @@ export default {
     "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE1MTU1NjcwODEsInN1YiI6IntcInVzZXJJZFwiOjksXCJsb2dpblRpbWVcIjoxNTE1NTY3MDgwOTkxfSJ9.R2FO0srt_te4HrIQkHrjSsJyvS1lHCLtxNothKoEJAU"
 
         "access_token": "eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJqd3QiLCJpYXQiOjE1MTU1NjcwODEsInN1YiI6IntcInVzZXJJZFwiOjksXCJsb2dpblRpbWVcIjoxNTE1NTY3MDgwOTkxfSJ9.R2FO0srt_te4HrIQkHrjSsJyvS1lHCLtxNothKoEJAU"
-
-
 
 */
 </script>

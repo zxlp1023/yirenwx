@@ -12,20 +12,20 @@
             <div class="weui-cell pl10">
               <div class="weui-cell__hd weui-cells_checkbox">
                 <label class=" weui-check__label" :for="item.pro.id">
-                  <input type="checkbox" class="weui-check " v-model="selectArr[index]"    :id="item.pro.id" >
+                  <input type="checkbox" class="weui-check " v-model="selectArr[index]" :id="item.pro.id" >
                   <i class="weui-icon-checked"></i>
                 </label>
               </div>
               <div class="weui-cell__hd pic">
                 <!-- <a href="msg-product.html"><img src="../assets/img/up/2.png" alt="" ></a> -->
-                <img src="../assets/img/up/2.png" alt="" >
+                <img :src="imgUrl+item.pro.img" alt="" >
               </div>
               <div class="weui-cell__bd">
                 <!-- <div class="fz15"><a class="weui-cell_access" href="msg-product.html">超人全身水洗旋转麻将机</a></div> -->
-                <div class="fz15"><div class="weui-cell_access" href="msg-product.html">超人全身水洗旋转麻将机</div></div>
+                <div class="fz15"><div class="weui-cell_access" href="msg-product.html">{{item.pro.name}}</div></div>
                 <div class="hui94 fz13">香槟金</div>
                 <div class="priceControl">
-                  <span class="price fz15">{{item.pro.id}}</span>
+                  <span class="price fz15">{{item.pro.price}}</span>
                   <div class="weui-count">
                     <span @click="minusNum({id:item.pro.id})"  class="weui-count__btn weui-count__decrease"></span>
                     <input class="weui-count__number" type="number"  v-model="item.num">
@@ -73,6 +73,8 @@
     data () {
       return {
         title: '购物车',
+        token: localStorage.getItem('token'),
+        imgUrl: this.$store.state.imgUrl,
         num: 1,
         mycart: '',
         selectArr: [],
@@ -81,8 +83,16 @@
         mycart: '' // 获取缓存中的购物车信息
       }
     },
-    created: function () {
-      
+    mounted: function () {
+      this.mycart = JSON.parse(localStorage.getItem('mycart'))  // 首先把缓存的值赋值给mycart
+      console.log(JSON.stringify(this.mycart))
+      // console.log( typeof(this.mycart))
+
+      // 设置checkbox 的默认值为 true  遍历所有元素,然后把所有selectArr 的子元素设置为true,就默认选中了
+      for ( var i=0; i<this.mycart.length; i++){
+        this.selectArr[i] = true
+        // console.log(this.selectArr)
+      }
     },
     methods: {
       addNum: function (e) {
@@ -181,27 +191,12 @@
        
       }
     },
-    mounted: function () {
-      this.mycart = JSON.parse(localStorage.getItem('mycart'))  // 首先把缓存的值赋值给mycart
-      // console.log(this.mycart)
-      // console.log( typeof(this.mycart))
-
-      // 设置checkbox 的默认值为 true  遍历所有元素,然后把所有selectArr 的子元素设置为true,就默认选中了
-      for ( var i=0; i<this.mycart.length; i++){
-        this.selectArr[i] = true
-        // console.log(this.selectArr)
-      }
-
-      
-      
-    
-    },
     computed: {
       totalPrice: function () {
         let [singlePrice,allPrice] = [0,0]
         for(let i=0; i<this.mycart.length; i++){
           if(this.selectArr[i]){
-            singlePrice = this.mycart[i].num * this.mycart[i].pro.id
+            singlePrice = this.mycart[i].num * this.mycart[i].pro.price
             allPrice += singlePrice
           }
           // console.log( singlePrice )

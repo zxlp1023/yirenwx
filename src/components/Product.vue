@@ -1,40 +1,34 @@
 <template>
   <div id="product">
-    <div class="backBar">
+    <!-- <div class="backBar">
       <router-link to="/" > <i class="iconfont icon-back"></i> </router-link>
       <div class="title" v-text="title">亿人共享</div>
-    </div>
+    </div> -->
   <div class="swiper-container">
-    <!-- Additional required wrapper -->
+
     <div class="swiper-wrapper">
       <!-- Slides -->
-      <div class="swiper-slide">
-        <img src="../assets/img/up/a1.jpg" />
-      </div>
-      <!--<div class="swiper-slide"><img src="img/up/banner.jpg" /></div>-->
-      <!--<div class="swiper-slide"><img src="img/up/banner.jpg" /></div>-->
+      <div class="swiper-slide" v-for="item in banners"><img :src="imgUrl+item" /></div>
     </div>
     <!-- 隐藏状态按钮 -->
-    <!--<div class="swiper-pagination"></div>-->
+    <div class="swiper-pagination"></div>
   </div>
   <!--banner end-->
 
   <div class="proIntro col">
-    <!-- <div class="fz15b">日式和风手绘陶瓷餐具</div> -->
     <div class="fz15b">{{promsg.goodsName}}</div>
     <span class="price">{{promsg.price}}</span>
     <span class="price2">{{promsg.oldPrice}}</span>
   </div>
   <div class="shopService  mt10">
-    <!-- <span v-for="item in labels" :key="item.id"><i class="weui-icon-success"></i>item.labelName</span> -->
-    <!-- <span v-for="item in labels" :key="item.id"><i class="weui-icon-success"></i>item.labelName</span> -->
     <span v-for="item in labels"><i class="weui-icon-success"></i>{{item.labelName}}</span>
   </div>
 
   <div class="weui-panel  commentsPro">
     <div class="weui-panel__hd fz15b">评论 <span class="star star-50"></span> <span class="score">5.0</span></div>
     <div class="weui-panel__bd">
-      <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+      <!-- 先关闭测试评论, 等订单流程通后再调用 -->
+      <!-- <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
         <div class="weui-media-box__hd">
           <img class="weui-media-box__thumb" src="../assets/img/up/a1.jpg" alt="">
         </div>
@@ -45,23 +39,12 @@
           </div>
           <p class="weui-media-box__desc">东西不错，我很喜欢，送来的时候态度也很好，很方 便下次还这样买，挺不错的</p>
         </div>
-      </a>
-      <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
-        <div class="weui-media-box__hd">
-          <img class="weui-media-box__thumb" src="../assets/img/up/a1.jpg" alt="">
-        </div>
-        <div class="weui-media-box__bd">
-          <h4 class="weui-media-box__title">勿忘初心</h4>
-          <div class="myStar">
-            <span class="star" :class="starscore"></span> <span>2015-12-08</span> 
-          </div>
-          <p class="weui-media-box__desc">东西不错，我很喜欢，送来的时候态度也很好，很方 便下次还这样买，挺不错的</p>
-        </div>
-      </a>
+      </a> -->
+
     </div>
     <div class="weui-panel__ft">
       <router-link to="ProductComments" class="weui-cell weui-cell_access weui-cell_link">
-        <div class="weui-cell__bd">查看全部84条评论</div>
+        <div class="weui-cell__bd">查看全部0条评论</div>
         <span class="weui-cell__ft"></span>
       </router-link>
       <!-- <a href="comments-product.html" class="weui-cell weui-cell_access weui-cell_link">
@@ -74,8 +57,8 @@
     <!-- {{}} -->
   </div>
   <div class="proFoot">
-    <a @click="addcart({id:promsg.id,phone:promsg.phone})" href="javascript:;" id="show-toast"  class="weui-btn weui-btn_primary">加入购物车</a>
-    <a @click="buyNow({id:promsg.id,phone:promsg.phone})" class="weui-btn weui-btn_warn">立即购买</a>
+    <a @click="addcart({id:promsg.id,name:promsg.goodsName,img:promsg.goodsImg,price:promsg.price})" href="javascript:;" id="show-toast"  class="weui-btn weui-btn_primary">加入购物车</a>
+    <a @click="buyNow({id:promsg.id,name:promsg.goodsName,img:promsg.goodsImg,price:promsg.price})" class="weui-btn weui-btn_warn">立即购买</a>
   </div>
   </div>
 </template>
@@ -85,42 +68,73 @@
     name: 'Prodoct',
     data () {
       return {
-        id:this.$route.query.id,
         title: '商品详情',
+        token: localStorage.getItem('token'),
+        imgUrl: this.$store.state.imgUrl,
+        id:this.$route.query.id,
         promsg: '',
+        banners:'',
         grade1: '3.5',
         grade2: '5.0',
         score: '',
         starscore: 'star-',
         mycart : '',
         shopNow: '',
-        token: localStorage.getItem('token'),
-        imgUrl: this.$store.state.imgUrl,
         labels: '',
         content:''
       }
     },
-    created: function () {
+    mounted: function () {
+      
+      axios({
+        method:'get',        
+        url:'api/goods/getContent?id=' + this.id,
+        headers: {'ACCESS_TOKEN': this.token}
+        })
+        .then( res => {
+          if( res.data.data.goodsBanner !== null){
+            this.banners = res.data.data.goodsBanner.split(",")
+          }
+          this.promsg = res.data.data
+          this.labels = res.data.data.labels
+          this.content = res.data.data.content
+
+          // console.log(this.promsg)
+        }).catch( error => {
+          console.log(error)
+        })
       //实例被创建完成后立即调用, 获取url参数中的id, 用来请求商品信息和评论
-          // this.id = this.$route.query.id
-        axios({
-          method:'get',
-          url:'api/goods/getContent?id=' + this.id,
-          headers: {'ACCESS_TOKEN': this.token}
-          })
-          .then( res => {
-            this.promsg = res.data.data
-            this.labels = res.data.data.labels
-            this.content = res.data.data.content
-            // console.log(this.labels)
-          }).catch( error => {
-            console.log(error)
-          })
+        // this.id = this.$route.query.id
+      
+      // console.log(this.id )
+      this.grade(this.grade2)  // 通过函数处理分数返回正确的分数
+
+      // 商品信息
+
+      // 评价展示
+      axios.get('http://cangdu.org:8001/ugc/v2/restaurants/'+ this.id +'/ratings?offset=0&limit=2').then(response => {
+        // console.log(response)
+        this.commentsTwo = response.body
+      }, response => {
+        // console.log(response)
+      })      
     },
     methods: {
       
       // 加入购物车
       addcart: function (e) {
+        axios({ 
+          method:'post',
+          url:'api/shoppingCart/add', 
+          // data:JSON.stringify({goodsId:this.id,num:1}),
+          data:{goodsId:this.id,num:1},
+          headers: {goodsId:this.id,num:1,'ACCESS_TOKEN': this.token}
+        }).then( res => {
+          console.log(res)
+        }).catch( error =>{
+          console.log(error)
+        })
+        
         const that = this
 
         if(this.id == undefined) { // 如果没有产品id, 不加入购物车
@@ -154,6 +168,8 @@
         }
       },     
       buyNow: function (e) {
+        
+
         //立即购买, 把商品信息存到shopNow , 然后存到缓存
         this.$router.push({path:'/OrderConfirm',query:{shopNow:1}})  // 立即购买传参
         let shopNow = [{'pro':e,'num':1}] 
@@ -207,22 +223,6 @@
         }
       }
       
-    },
-    mounted: function () {
-      // console.log(this.id )
-      this.grade(this.grade2)  // 通过函数处理分数返回正确的分数
-
-      // 商品信息
-
-      // 评价展示
-      axios.get('http://cangdu.org:8001/ugc/v2/restaurants/'+ this.id +'/ratings?offset=0&limit=2').then(response => {
-        // console.log(response)
-        this.commentsTwo = response.body
-      }, response => {
-        // console.log(response)
-      })      
-
-    }
-    
+    }    
   }
 </script>
