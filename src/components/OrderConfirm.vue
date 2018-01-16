@@ -105,23 +105,24 @@
       }
     },
     mounted: function () {
-      // console.log(this.orderDto.userId)
-      // console.log(this.orderDto.goodsList[0].goodsId)
-
-      // 获取商品信息
-      // axios({
-      //   method:'get',
-      //   url: 'api/goods/getContent?id=' + this.id,
-      //   headers: {'ACCESS_TOKEN': this.token}
-      // }).then( res =>{
-      //   this.promsg = res.data.data
-      //   console.log( this.promsg )
-      // }).catch( error => {
-      //   console.log(error)
-      // }) //axios end
+        // console.log(this.orderDto.userId)
+        // console.log(this.orderDto.goodsList[0].goodsId)
+        //获取默认地址
+        axios({
+          method:'get',
+          url:'api/address/getDefault',
+          headers: {'ACCESS_TOKEN': this.token}
+        })
+        .then( res => {
+          console.log(1111111)
+          console.log(res.data) 
+          console.log(1111111)
+        }).catch( error => {
+          console.log(error)
+        })
 
       // 通过缓存获取数据
-     if( this.shopNow == 1 ){  // 如果shopNow == 1 那就读立即购买的缓存数据
+    if( this.shopNow == 1 ){  // 如果shopNow == 1 那就读立即购买的缓存数据
         this.mycart = JSON.parse(localStorage.getItem('shopNow'))   
         // console.log('现在是立即购买传过来的数据')
         // console.log( this.mycart[0].pro.id)

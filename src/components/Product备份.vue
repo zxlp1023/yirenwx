@@ -124,7 +124,24 @@
       
       // 加入购物车
       addcart: function (e) {
+        axios({ 
+          method:'post',
+          url:'api/shoppingCart/add?goodsId='+this.id+'&num=1', 
+          headers: {'ACCESS_TOKEN': this.token}
+        }).then( res => {
+          
+          if(res.data.code < 2000){  //如果code小于2000,就表示成功
+            $.toast("加入购物车成功")
+          }else{
+            // $.toast(res.data.msg)
+            $.toast(res.data.msg, "forbidden");
+          }
+        }).catch( error =>{
+          console.log(error)
+        })
+        
         const that = this
+
         if(this.id == undefined) { // 如果没有产品id, 不加入购物车
               return
         }  
@@ -144,7 +161,7 @@
           if(addok){  // 如果addok为真, 则添加商品到缓存
             mycart.push({'pro':e,'num':1})
           }
-        
+         
           that.mycart = mycart
           localStorage.setItem('mycart',JSON.stringify(mycart))
         } else { 
@@ -154,8 +171,6 @@
           // this.$store.state.mycart = JSON.stringify(mycart)  // 添加到全局变量
           // console.log(this.$store.state.mycart)
         }
-        $.toast("加入购物车成功")
-        
       },     
       buyNow: function (e) {
         

@@ -40,11 +40,11 @@ $(function () {
     })
 
     //加入购物车成功
-    $(document).on("click", "#show-toast", function () {
-        $.toast("成功加入购物车", function () {
-            // console.log('已加入购物车')
-        });
-    })
+    // $(document).on("click", "#show-toast", function () {
+    //     $.toast("成功加入购物车", function () {
+    //         // console.log('已加入购物车')
+    //     });
+    // })
 
     //购物车加减数量
 /*     var MAX = 99,

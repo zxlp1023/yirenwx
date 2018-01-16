@@ -1,12 +1,15 @@
 <template>
   <div>
-    <div class="backBar">
+    <!-- <div class="backBar">
       <router-link to="My" > <i class="iconfont icon-back"></i> </router-link>
       <div class="title" v-text="title">亿人共享</div>
-    </div>
+    </div> -->
     <div class="cart">
-      <mt-cell-swipe v-for="(item,index) in mycart" :key="item.pro.id" title="" :right="[{content: '删除',style: { background: '#f43b3e', color: '#fff' },
-          handler: () => deletePro(index) }]">
+      
+      <!-- <mt-cell-swipe v-for="(item,index) in mycart" :key="item.pro.id" title="" 
+      :right="[{content: '删除', style: { background: '#f43b3e', color: '#fff' }, handler: () => deleteItem() }]"> -->
+      <mt-cell-swipe v-for="(item,index) in mycart" :key="item.pro.id" title="" 
+      :right="[{content: '删除', style: { background: '#f43b3e', color: '#fff' }, handler: () => deleteItem({index:index,id:item.pro.id}) }]">
         <div class="weui-cell weui-cell_swiped">
           <div class="weui-cell__bd" style="transform: translate3d(0px, 0px, 0px);">
             <div class="weui-cell pl10">
@@ -23,7 +26,7 @@
               <div class="weui-cell__bd">
                 <!-- <div class="fz15"><a class="weui-cell_access" href="msg-product.html">超人全身水洗旋转麻将机</a></div> -->
                 <div class="fz15"><div class="weui-cell_access" href="msg-product.html">{{item.pro.name}}</div></div>
-                <div class="hui94 fz13">香槟金</div>
+                <!-- <div class="hui94 fz13">香槟金</div> -->  <!-- 注释规则 -->
                 <div class="priceControl">
                   <span class="price fz15">{{item.pro.price}}</span>
                   <div class="weui-count">
@@ -57,7 +60,7 @@
             合计:<span class="price ">{{totalPrice}}</span>
           </div>
           <div class="weui-cell__hd">
-            <!-- <a class="weui-btn weui-btn_warn btn-radius0" @click="submit">结算</a> -->
+            <!-- <a class="weui-btn weui-btn_warn btn-radius0" @click="changeCart">结算</a> -->
             <router-link to="OrderConfirm" class="weui-btn weui-btn_warn btn-radius0" @click="submit">结算</router-link>
           </div>
         </div>
@@ -73,8 +76,9 @@
     data () {
       return {
         title: '购物车',
-        token: localStorage.getItem('token'),
         imgUrl: this.$store.state.imgUrl,
+        token: localStorage.getItem('token'),
+        userId: localStorage.getItem('uid'),
         num: 1,
         mycart: '',
         selectArr: [],
@@ -85,7 +89,7 @@
     },
     mounted: function () {
       this.mycart = JSON.parse(localStorage.getItem('mycart'))  // 首先把缓存的值赋值给mycart
-      console.log(JSON.stringify(this.mycart))
+      // console.log(JSON.stringify(this.mycart))
       // console.log( typeof(this.mycart))
 
       // 设置checkbox 的默认值为 true  遍历所有元素,然后把所有selectArr 的子元素设置为true,就默认选中了
@@ -130,19 +134,8 @@
         that.mycart = mycart
         localStorage.setItem('mycart',JSON.stringify(mycart))
       },
-      deletePro: function(e){
-        // 删除商品   循环商品, 获取索引  删除指定锁定
-        let that = this
-        let mycart = JSON.parse(localStorage.getItem('mycart')) // 获取缓存中的购物车信息
-        for(let i=0; i<mycart.length; i++){
-          mycart.splice(e,1)
-          break
-        }
-        that.mycart = mycart
-        localStorage.setItem('mycart',JSON.stringify(mycart))
-      },
       selectAll: function(e){
-
+        
        /*  for(let i=0; i< this.selectArr.length; i++){
             
              if(e.currentTarget.checked){ 
@@ -187,8 +180,20 @@
         //   this.selectArr = true
         // }
       },
-      submit: function (){
-       
+      deleteItem: function(e){
+
+         // 删除商品   循环商品, 获取索引  删除指定锁定
+          let that = this
+          let mycart = JSON.parse(localStorage.getItem('mycart')) // 获取缓存中的购物车信息
+          for(let i=0; i<mycart.length; i++){
+            mycart.splice(e,1)
+            break
+          }
+          that.mycart = mycart
+          localStorage.setItem('mycart',JSON.stringify(mycart))
+      },
+      submit: function () {
+          // console.log(111)
       }
     },
     computed: {
@@ -217,8 +222,6 @@
       }
     }
   }
-
-
 </script>
 <style>
 .mint-cell-title{ display: none}
