@@ -1,5 +1,10 @@
 $(function () {
 
+    // $(".swiper-container").swiper({
+    //     loop: true,
+    //     autoplay: 3000
+    // });
+
     // 返回按钮
     $('.icon-back').click(function () {
         history.go(-1)
@@ -29,15 +34,17 @@ $(function () {
     // })
 
     //删除地址
-    $('.addr-manage .delete').click(function () {
-        $(this).parents('dt').parent().remove();
-    })
+    // $('.addr-manage .delete').click(function () {
+    //     $(this).parents('dt').parent().remove();
+    // })    $('.addr-manage .delete').click(function () {
+    //     $(this).parents('dt').parent().remove();
+    // })
 
     // 首页swiper
-    $(".swiper-container").swiper({
-        loop: true,
-        autoplay: 3000
-    })
+    // $(".swiper-container").swiper({
+    //     loop: true,
+    //     autoplay: 3000
+    // })
 
     //加入购物车成功
     // $(document).on("click", "#show-toast", function () {
@@ -71,7 +78,7 @@ $(function () {
 
 
     // 领取红包
-    function GetRTime() {
+/*     function GetRTime() {
         var EndTime = new Date('2018/1/6 23:44:00');
         var NowTime = new Date();
         var t = EndTime.getTime() - NowTime.getTime();
@@ -91,11 +98,11 @@ $(function () {
         document.getElementById("t_h").innerHTML = h + " :";
         document.getElementById("t_m").innerHTML = m + " :";
         document.getElementById("t_s").innerHTML = s + "";
-    }
+    } */
     // setInterval(GetRTime, 1000); //关闭倒计时
 
     // 红包
-    $('.redPacket').click(function () {
+    /* $('.redPacket').click(function () {
         $('#dialog').fadeIn(300);
     })
 
@@ -105,7 +112,7 @@ $(function () {
     })
     $('.cls').click(function () {
         $(this).parents('#dialog').fadeOut(300);
-    })
+    }) */
 
     // 充值
     $('.withdrawNumber input').focus();

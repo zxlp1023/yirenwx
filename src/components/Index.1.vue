@@ -47,8 +47,6 @@ export default {
   data () {
     return {
       title: '亿人共享',
-      selected: '首页',
-      
     }
   },
   mounted: function () {

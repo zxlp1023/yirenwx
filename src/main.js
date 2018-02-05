@@ -3,8 +3,8 @@
 import Vue from 'vue'
 // 完整引入MinUI
 import MintUI from 'mint-ui'
-import 'mint-ui/lib/style.css'
 // 引入我的scss文件
+import 'mint-ui/lib/style.css'
 import './assets/style/weui.min.css'
 import './assets/style/jquery-weui.min.css'
 import './assets/style/yiren.scss'

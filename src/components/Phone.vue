@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class="backBar">
+    <!-- <div class="backBar">
       <router-link to="/" > <i class="iconfont icon-back"></i> </router-link>
       <div class="title" v-text="title">亿人共享</div>
-    </div>
+    </div> -->
     <div class="call">
       <div class="weui-cell">
         <div class="weui-cell__bd">
@@ -97,7 +97,7 @@
     </div>
 
     <div class="weui-tabbar">
-      <router-link to="/" class="weui-tabbar__item">
+      <router-link to="/" class="weui-tabbar__item ">
         <div class="weui-tabbar__icon">
           <i class="iconfont icon-home"></i>
         </div>
@@ -107,7 +107,7 @@
         <div class="weui-tabbar__icon">
           <i class="iconfont icon-message"></i>
         </div>
-        <p class="weui-tabbar__label">会员对讲</p>
+        <p class="weui-tabbar__label">ZJZ对讲</p>
       </router-link>
       <router-link to="Financial" class="weui-tabbar__item">
         <div class="weui-tabbar__icon">
@@ -125,17 +125,19 @@
   </div>
 </template>
 <script>
+
   export default {
     name: 'Phone',
     data () {
       return {
-        title: '网络电话'
+        title: '网络电话',
+
       }
     }
   }
 </script>
-<style >
-  body{background: #ffffff;}
+<style scoped>
+  body{background: #ffffff; margin-top: 1rem;}
 </style>
 
 

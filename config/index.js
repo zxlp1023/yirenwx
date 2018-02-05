@@ -13,8 +13,8 @@ module.exports = {
     proxyTable: {  //设置代理
       '/api': {
         // target: 'http://cangdu.org:8001/',
-        target: 'http://211.149.219.18:8818/',
-        // target: 'http://172.16.1.58:8818/',
+        target: 'http://211.149.219.18:8818/',  //服务器
+        // target: 'http://192.168.1.169:8818/',
         changeOrigin: true,
         pathRewrite: {
           '^/api': ''

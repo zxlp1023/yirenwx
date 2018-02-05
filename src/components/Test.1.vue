@@ -1,28 +1,28 @@
 <template>
- <mt-loadmore  :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" bottomPullText="" :bottomDropText="bottomDropText" ref="loadmore">
+ <mt-loadmore  :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" bottomPullText="" bottomDropText="正在加载..." ref="loadmore">
     <div class="weui-panel pro-index">
     <div class="weui-panel__bd">        
-        <router-link :to="{path:'/getContent', query: {id: item.id}}" v-for="item in pros" :key="item.id"   class="weui-media-box weui-media-box_appmsg" >      
-        <!-- <router-link to="{path:'/Product', query: {id: item.id}}" class="weui-media-box weui-media-box_appmsg" v-for="item in pros" :key="item.id" >       -->
-          <div class="weui-media-box__hd">
-            <img class="weui-media-box__thumb" :src="imgUrl + item.goodsImg" alt="">
+      <router-link :to="{path:'/getContent', query: {id: item.id}}" v-for="item in pros" :key="item.id"   class="weui-media-box weui-media-box_appmsg" >      
+      <!-- <router-link to="{path:'/Product', query: {id: item.id}}" class="weui-media-box weui-media-box_appmsg" v-for="item in pros" :key="item.id" >       -->
+        <div class="weui-media-box__hd">
+          <img class="weui-media-box__thumb" :src="imgUrl + item.goodsImg" alt="">
+        </div>
+        <div class="weui-media-box__bd">
+          <h4 class="weui-media-box__title">{{ item.goodsName }}</h4>
+          <p class="weui-media-box__desc">{{item.goodsLabel}}</p>
+          <div class="item-star">
+            <span class="star" :class="starscore" ></span>
+            <span>{{item.goodsStar}}</span>
           </div>
-          <div class="weui-media-box__bd">
-            <h4 class="weui-media-box__title">{{ item.goodsName }}</h4>
-            <p class="weui-media-box__desc">{{item.goodsLabel}}</p>
-            <div class="item-star">
-              <span class="star" :class="starscore" ></span>
-              <span>{{item.goodsStar}}</span>
-            </div>
-            <div class="item-price">
-              <span class="price">{{item.price}}</span>
-              <span class="buyers">{{item.salesVolume}}</span>
-            </div>
+          <div class="item-price">
+            <span class="price">{{item.price}}</span>
+            <span class="buyers">{{item.salesVolume}}</span>
           </div>
-        </router-link>
-      </div>
-    </div>  
-  </mt-loadmore> <!--pro-index end-->
+        </div>
+      </router-link>
+    </div>
+  </div>  <!--pro-index end-->
+</mt-loadmore>
 </template>
 <script>
   export default {
@@ -40,13 +40,12 @@
         allLoaded: false,
         page:1,
         pages:'',
-        bottomDropText:'加载更多...'
       };
     },
     mounted: function () {
       axios({
         method:'get',
-        url:'api/goods/list?current=' + this.page + '&size=2',
+        url:'api/goods/list?current=' + this.page + '&size=3',
         headers: {'ACCESS_TOKEN': this.token}
         })
         .then( res => {
@@ -71,18 +70,14 @@
     methods: {
       loadBottom () {
         this.page += 1
-        // this.bottomLoadingText = ''
-        // this.autoFill = false
         if(this.page == this.pages){
-          this.bottomDropText = '没有更多了'
-          //  this.$refs.loadmore.onBottomLoaded();
-           
-          // this.allLoaded = true  // 不再加载
+          this.allLoaded = true
+           this.$refs.loadmore.onBottomLoaded();
         }
         setTimeout(() => {
           axios({
             methods: 'get',
-            url:'api/goods/list?current=' + this.page + '&size=2',
+            url:'api/goods/list?current=' + this.page + '&size=3',
             headers: {'ACCESS_TOKEN': this.token}
           })
           .then( res => { 
@@ -94,7 +89,6 @@
             
             this.pros2 = res.data.data.records //再赋值给变量
             this.pros = this.pros.concat(this.pros2) //再赋值给变量
-            this.$refs.loadmore.onBottomLoaded();  // 固定方法，查询完要调用一次，用于重新定位  不然会一直有加载中...
             //  console.log(this.pros)    
 
         }, 1500);
@@ -141,4 +135,6 @@
   };
 </script>
 <style>
+li{ line-height: 3; background: #eeeeee; border-bottom: 1px solid #ccc}
+li:odd{ background: #fff;}
 </style>

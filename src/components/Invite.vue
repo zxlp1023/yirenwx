@@ -1,7 +1,7 @@
 <template>
   <div class="share">
     <div class="backBar">
-      <router-link to="My" > <i class="iconfont icon-back"></i> </router-link>
+      <!-- <router-link to="My" > <i class="iconfont icon-back"></i> </router-link> -->
     </div>
     <div class="bg">
       <img src="../assets/img/invite.jpg" alt="邀请好友">
@@ -21,7 +21,7 @@
       </div>
     </div>
     <div class="qrcode">
-      <img src="img/up/qrcode.png" alt="" >
+      <img src="../assets/img/up/qrcode.png" alt="" >
     </div>
     <a href="javascript:;" class="weui-btn">分享二维码邀请好友</a>
     <ol>

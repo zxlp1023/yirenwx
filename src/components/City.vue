@@ -100,7 +100,6 @@
           <!-- <router-link @click="gocity" v-for="item in items" :to="'/City/'+ item.id" :key='item.id'>{{item.name}} </router-link> -->
           <p @click="goindex({name:item.name,id:item.id})" v-for="item in items"  :key='item.id'>{{item.name}} </p>
         </div>
-        
       </div>
     </div>
   </div>

@@ -620,7 +620,7 @@
 
 //
 #dialog{
-    position: fixed; width: 100%;  display: none;
+    position: fixed; width: 100%;  /* display: none; */
     height: 100%; z-index: 100;
     text-align: center;  //关闭按钮居中
     .bg{
@@ -638,7 +638,7 @@
 
     //打开红包
     .getRedPacket{
-        display: none;
+        // display: none;
         z-index: 104;
         .msg{
             position: absolute; width: 100%;  text-align: center; top: 20%;

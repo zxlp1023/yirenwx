@@ -4,7 +4,7 @@
       <div class="weui-cell">
         <div class="weui-cell__hd">
           <img src="../assets/img/up/head.png" alt="">
-        </div>
+        </div>  
         <div class="weui-cell__bd">
           <span class="f17">小丸子</span>
           <p class="fz13">网络电话：21301910</p>
@@ -12,19 +12,24 @@
       </div>
     </div> <!-- account -->
     <div class="weui-grids  ">
-      <a href="order-status.html" class="weui-grid ">
+      <!-- <a href="order-status.html" class="weui-grid ">
         <span>0</span>
         <p class="weui-grid__label">待付款</p>
-      </a>
-      <a href="order-status.html" class="weui-grid ">
-        <span>0</span>
+      </a> -->
+      <router-link to="Orders" class="weui-grid ">
+        <span>{{totalOrdersIng}}</span>
+        <p class="weui-grid__label">待付款</p>
+      </router-link> 
+     <router-link to="Orders" class="weui-grid ">
+        <span>{{totalOrdersToEvaluate}}</span>
         <p class="weui-grid__label">待确认</p>
-      </a>
-      <a href="order-status.html" class="weui-grid ">
-        <span>0</span>
+     </router-link> 
+     <router-link to="Orders" class="weui-grid ">
+        <span>{{totalOrdersFinish}}</span>
         <p class="weui-grid__label">待评价</p>
-      </a>
+     </router-link> 
     </div>
+    
     <div class="weui-cells quickNav">
       <router-link to="Wallet" class="weui-cell weui-cell_access">
         <div class="weui-cell__hd">
@@ -72,18 +77,7 @@
         <div class="weui-cell__ft"></div>
       </router-link>
     </div>  <!-- quickNav -->
-    <div class="redPacket">
-        <img src="../assets/img/redPacket0.png" alt="">
-        <div>
-          <span>距离红包开启</span>
-          <p>
-            <!-- <span id="t_d">00</span> -->
-            <span id="t_h">00</span>
-            <span id="t_m">00</span>
-            <span id="t_s">00</span>
-          </p>
-        </div>
-    </div>
+    
     <div class="weui-tabbar">
       <router-link to="/" class="weui-tabbar__item">
         <div class="weui-tabbar__icon">
@@ -95,13 +89,13 @@
         <div class="weui-tabbar__icon">
           <i class="iconfont icon-message"></i>
         </div>
-        <p class="weui-tabbar__label">电话</p>
+        <p class="weui-tabbar__label">ZJZ对讲</p>
       </router-link>
       <router-link to="Financial" class="weui-tabbar__item ">
         <div class="weui-tabbar__icon">
           <i class="iconfont icon-money"></i>
         </div>
-        <p class="weui-tabbar__label">金融</p>
+        <p class="weui-tabbar__label">小金库</p>
       </router-link>
       <router-link to="My" class="weui-tabbar__item weui-bar__item--on">
         <div class="weui-tabbar__icon">
@@ -111,34 +105,56 @@
       </router-link>
     </div> <!--footer end-->
 
-    <!-- 红包领取界面 -->
-    <div id="dialog">
-      <div class="bg"></div>
-      <div class="cnt">
-        <img id="a1" src="../assets/img/redPacket1.png" alt="">
-        <i  class="cls iconfont icon-close"></i>
-      </div>
-      <div class="getRedPacket">
-        <img src="../assets/img/redPacket2.png" alt="">
-        <div class="msg">
-          <span>恭喜您获得</span>
-          <div>0.43</div>
-          <p>可在“我的钱包”中查看</p>
-
-        </div>
-        <i  class="cls iconfont icon-close"></i>
-      </div>
-    </div>
+    <red-packet></red-packet>
+    
   </div>
 </template>
 <script>
+import RedPacket from '@/components/RedPacket'
   export default {
     name: 'My',
     data () {
       return {
-        title: '我的'
+        title: '我的',
+        token: localStorage.getItem("token"),
+        totalOrdersIng:0,  // 进行中
+        totalOrdersToEvaluate:0,  // 待评价
+        totalOrdersFinish:0,  // 已完成
       }
-    }
+    },
+    mounted: function () {
+      axios({  // 进行中
+        method: "get",
+        url: 'api/order/haveInHand?current=1&size=1',
+        headers: { ACCESS_TOKEN: this.token }
+      })
+      .then( res => {
+        this.totalOrdersIng = res.data.data.total
+      })
+      .catch( error => {
+      }),
+      axios({  // 待评价
+        method: "get",
+        url: 'api/order/toBeEvaluated?current=1&size=1',
+        headers: { ACCESS_TOKEN: this.token }
+      })
+      .then( res => {
+        this.totalOrdersToEvaluate = res.data.data.total
+      })
+      .catch( error => {
+      }),
+      axios({  //  已完成
+        method: "get",
+        url: 'api/order/completed?current=1&size=1',
+        headers: { ACCESS_TOKEN: this.token }
+      })
+      .then( res => {
+        this.totalOrdersFinish = res.data.data.total
+      })
+      .catch( error => {
+      })
+    },
+    components: {RedPacket}
   }
 </script>
 <style>

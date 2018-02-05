@@ -15,7 +15,7 @@
             <div class="weui-cell pl10">
               <div class="weui-cell__hd weui-cells_checkbox">
                 <label class=" weui-check__label" :for="item.pro.id">
-                  <input type="checkbox" class="weui-check " v-model="selectArr[index]" :id="item.pro.id" >
+                  <input type="checkbox" class="weui-check " v-model="selectArr[index]" :id="item.pro.id" checked="true" >
                   <i class="weui-icon-checked"></i>
                 </label>
               </div>
@@ -88,14 +88,16 @@
       }
     },
     mounted: function () {
-      this.mycart = JSON.parse(localStorage.getItem('mycart'))  // 首先把缓存的值赋值给mycart
-      // console.log(JSON.stringify(this.mycart))
-      // console.log( typeof(this.mycart))
+      if(localStorage.getItem('mycart')){  // 如果缓存存在, 则赋值给变量
+        this.mycart = JSON.parse(localStorage.getItem('mycart'))  // 首先把缓存的值赋值给mycart
+        // console.log(JSON.stringify(this.mycart))
 
-      // 设置checkbox 的默认值为 true  遍历所有元素,然后把所有selectArr 的子元素设置为true,就默认选中了
-      for ( var i=0; i<this.mycart.length; i++){
-        this.selectArr[i] = true
-        // console.log(this.selectArr)
+        // 设置checkbox 的默认值为 true  遍历所有元素,然后把所有selectArr 的子元素设置为true,就默认选中了
+
+          for ( var i=0; i<this.mycart.length; i++){
+            this.selectArr[i] = true
+            // console.log(this.selectArr)
+          }
       }
     },
     methods: {
@@ -109,6 +111,7 @@
         let mycart = JSON.parse(localStorage.getItem('mycart')) // 获取缓存中的购物车信息
         // console.log(mycart)
         // 添加数量
+        
         for(let i =0; i < mycart.length; i++ ) {
          if( mycart[i].pro.id == e.id ){
            mycart[i].num += 1
@@ -216,7 +219,7 @@
         }
 
         //返回总价
-        return allPrice
+        return allPrice.toFixed(2) 
 
 
       }

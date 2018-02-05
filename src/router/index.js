@@ -14,6 +14,11 @@ import PhoneSend from '@/components/PhoneSend'
 import PhoneAgree from '@/components/PhoneAgree'
 import Financial from '@/components/Financial'
 import My from '@/components/My'
+import Orders from '@/components/Orders'
+import Evaluate from '@/components/Evaluate'
+// import OrdersIng from '@/components/OrdersIng'
+// import OrdersToEvaluate from '@/components/OrdersToEvaluate'
+// import OrdersFinish from '@/components/OrdersFinish'
 import Wallet from '@/components/Wallet'
 import Invite from '@/components/Invite'
 import AddressManage from '@/components/AddressManage'
@@ -112,6 +117,31 @@ export default new Router({
         name: 'My',
         component: My
       },
+      {
+        path: '/Orders',
+        name: 'Orders',
+        component: Orders
+      },
+      {
+        path: '/Evaluate',
+        name: 'Evaluate',
+        component: Evaluate
+      },
+      // {
+      //   path: '/OrdersIng',
+      //   name: 'OrdersIng',
+      //   component: OrdersIng
+      // },
+      // {
+      //   path: '/OrdersToEvaluate',
+      //   name: 'OrdersToEvaluate',
+      //   component: OrdersToEvaluate
+      // },
+      // {
+      //   path: '/OrdersFinish',
+      //   name: 'OrdersFinish',
+      //   component: OrdersFinish
+      // },
       {
         path: '/Wallet',
         name: 'Wallet',

@@ -7,13 +7,26 @@
 
     <div class="cfmOrder">
       <div class="weui-cells addr mt0">
-        <router-link to="AddressManage" class="weui-cell weui-cell_access">
+        <router-link :to="{path:'/AddressManage',query:{from:'orderConfirmShopNow'}}"  class="weui-cell weui-cell_access" v-if="shopNow == 1">
           <div class="weui-cell__hd">
             <i class="iconfont icon-location2"></i>
           </div>
           <div class="weui-cell__bd fz14 p075" v-if="defaultAddr">
-            <p>收货人：<span class="pl10">猫十一</span><span class="pl10 fz15">18046721351</span></p>
-            <p class="hui72">收货地址：四川省成都市锦江区 滨江花园3栋 1单元</p>
+            <p>收货人：<span class="pl10">{{defaultAddr.name}}</span><span class="pl10 fz15">{{defaultAddr.phone}}</span></p>
+            <p class="hui72">收货地址：{{defaultAddr.address}}{{defaultAddr.homeNum}}</p>
+          </div>
+          <div class="weui-cell__bd fz14 p075" v-else>
+            请填写收货地址
+          </div>
+          <div class="weui-cell__ft"></div>
+        </router-link>
+        <router-link :to="{path:'/AddressManage',query:{from:'orderConfirmCart'}}"  class="weui-cell weui-cell_access" v-else>
+          <div class="weui-cell__hd">
+            <i class="iconfont icon-location2"></i>
+          </div>
+          <div class="weui-cell__bd fz14 p075" v-if="defaultAddr">
+            <p>收货人：<span class="pl10">{{defaultAddr.name}}</span><span class="pl10 fz15">{{defaultAddr.phone}}</span></p>
+            <p class="hui72">收货地址：{{defaultAddr.address}}{{defaultAddr.homeNum}}</p>
           </div>
           <div class="weui-cell__bd fz14 p075" v-else>
             请填写收货地址
@@ -65,6 +78,10 @@
           </div>
           <div class="weui-cell__hd">
             <a @click="submitOrder" to="Pay" class="weui-btn weui-btn_warn btn-radius0">去支付</a>
+            <!-- <router-link @click="submitOrder" to="Pay" class="weui-btn weui-btn_warn btn-radius0">
+              去支付
+            </router-link> -->
+            
           </div>
         </div>
       </div>
@@ -80,8 +97,8 @@
         token: localStorage.getItem('token'),
         imgUrl: this.$store.state.imgUrl,
         shopNow: this.$route.query.shopNow,
-        id: this.$route.query.id,
-        promsg: '',
+        addrId: this.$route.query.addrId,
+        promsg: '', 
         mycart: '',
         orderDto: {
                     "addressId": 0,
@@ -99,14 +116,20 @@
                     ],
                     "userId": localStorage.getItem('uid')
                   },
-        price: 20,
-        defaultAddr: [{name:'猫十一',tel:'13566668888',addr:'四川省成都市锦江区 滨江花园3栋 1单元'}]
-        
+        defaultAddr: null
       }
     },
     mounted: function () {
-        // console.log(this.orderDto.userId)
-        // console.log(this.orderDto.goodsList[0].goodsId)
+      // this.orderDto.addressId = this.addrId
+      if( this.addrId != undefined){ //如果addrId存在, 把地址id传给订单对象
+        this.orderDto.addressId = this.$route.query.addrId  //订单中addressId为选择地址的id
+        this.defaultAddr = {
+          name:this.$route.query.name,
+          phone:this.$route.query.tel,
+          address:this.$route.query.addr,
+          homeNum:this.$route.query.addr2,
+        }
+      }else{
         //获取默认地址
         axios({
           method:'get',
@@ -114,12 +137,14 @@
           headers: {'ACCESS_TOKEN': this.token}
         })
         .then( res => {
-          console.log(1111111)
-          console.log(res.data) 
-          console.log(1111111)
+          this.defaultAddr = res.data.data
+          this.orderDto.addressId = res.data.data.id //订单中addressId为选择地址的id
+          // console.log(JSON.stringify(this.orderDto.addressId))
         }).catch( error => {
           console.log(error)
         })
+      }
+        
 
       // 通过缓存获取数据
     if( this.shopNow == 1 ){  // 如果shopNow == 1 那就读立即购买的缓存数据
@@ -137,7 +162,7 @@
           // console.log(this.mycart[i].num)
           // console.log(this.mycart[i].pro.id) 
         }
-        console.log( JSON.stringify ( this.orderDto ) )  // 查看orderDto的数据
+        // console.log( JSON.stringify ( this.orderDto ) )  // 查看orderDto的数据
       }
       else{ // 如果不是立即购买那就是从购物车过来的, mycart的数据就是来自缓存购物车
         this.mycart = JSON.parse(localStorage.getItem('mycart'))
@@ -173,8 +198,8 @@
           // 添加数量
           for(let i =0; i < mycart.length; i++ ) {
           if( mycart[i].pro.id == e.id ){
-            mycart[i].num += 1
-            //  console.log(mycart[i].num) 
+            mycart[i].num += 1  // 缓存数量加1
+            this.orderDto.goodsList[i].num +=1  //同时要发送的商品数量也加1
             break
             }
           }
@@ -186,6 +211,7 @@
           for(let i =0; i < mycart.length; i++ ) {
           if( mycart[i].pro.id == e.id ){
             mycart[i].num += 1
+            this.orderDto.goodsList[i].num +=1
             //  console.log(mycart[i].num) 
             break
             }
@@ -205,6 +231,7 @@
               break
               }
               mycart[i].num -= 1
+              this.orderDto.goodsList[i].num -=1
             }
           }
           that.mycart = mycart
@@ -217,6 +244,7 @@
                 break
                 }
                 mycart[i].num -= 1
+                this.orderDto.goodsList[i].num -=1
               }
             }
             that.mycart = mycart
@@ -228,6 +256,8 @@
         //提交的时候需要判断是购物车还是立即购买
         //立即购买
         if( this.shopNow == 1 ){
+            console.log( '发送数据'+JSON.stringify ( this.orderDto ) )
+          
           axios({
             method:'post',
             url:'api/order/create',
@@ -236,14 +266,19 @@
               'ACCESS_TOKEN': this.token
             }
           }).then( res => {
-            console.log('立即购买')
-            console.log( JSON.stringify ( this.orderDto ) )
-            console.log( res)
+            if (res.data.code < 2000) {
+              localStorage.removeItem('shopNow')
+              this.$router.push('pay')
+            }
+            // console.log('来源:立即购买')
+            // console.log( '发送数据'+JSON.stringify ( this.orderDto ) )
+            // console.log( '响应'+JSON.stringify(res.data))
           }).catch( error => {
             console.log( error )
           })
         } else{
           // 购物车下单
+            // console.log( '发送数据'+JSON.stringify ( this.orderDto ) )
           axios({
             method:'post',
             url:'api/order/create',
@@ -252,25 +287,17 @@
               'ACCESS_TOKEN': this.token
             }
           }).then( res => {
-            console.log('购物车')
-            console.log( JSON.stringify ( this.orderDto ) )
-            console.log( JSON.stringify ( res.data ))
+            if (res.data.code < 2000) {
+              localStorage.removeItem('mycart')
+              this.$router.push('pay')
+            }
+            // console.log('来源:购物车')
+            // console.log( '发送数据'+JSON.stringify ( this.orderDto ) )
+            // console.log( '响应'+JSON.stringify ( res.data) )
           }).catch( error => {
             console.log( error )
           })
         }
-        // axios({
-        //   method:'post',
-        //   url:'api/order/create',
-        //   data: orderDto ,
-        //   headers:{
-        //     'ACCESS_TOKEN': this.token
-        //   }
-        // }).then( res => {
-        //   console.log( res )
-        // }).catch( error => {
-        //   console.log( error )
-        // })
       }      
     },
     computed: {
@@ -285,7 +312,7 @@
           // console.log( allPrice )
         }
         //返回总价
-        return allPrice 
+        return allPrice.toFixed(2)
       }
     }
   }

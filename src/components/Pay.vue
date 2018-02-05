@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class="backBar">
+    <!-- <div class="backBar">
       <router-link to="OrderConfirm" > <i class="iconfont icon-back"></i> </router-link>
       <div class="title" v-text="title">亿人共享</div>
-    </div>
+    </div> -->
 
     <div class="pay">
       <div class="weui-cells weui-cells_checkbox"></div>

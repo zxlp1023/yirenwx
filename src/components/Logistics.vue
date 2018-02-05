@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class="backBar">
+    <!-- <div class="backBar">
       <router-link to="My" > <i class="iconfont icon-back"></i> </router-link>
       <div class="title" v-text="title">亿人共享</div>
-    </div>
+    </div> -->
     <div class="logistics">
       <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
         <div class="weui-media-box__hd">
